@@ -1,13 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Screen from './app/components/screen';
+
+import Screen from './app/components/Screen';
+import Dashboard from "./app/screens/Dashboard";
 
 export default function App() {
   return (
     <React.Fragment>
-      <Screen>
-      </Screen>
+      <Dashboard>
+      </Dashboard>
     </React.Fragment>
   );
 }
