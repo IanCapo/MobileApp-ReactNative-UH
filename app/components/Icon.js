@@ -4,10 +4,10 @@ import { View, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from '../utilities/colors';
 
-export default function Icon({name}) {
+export default function Icon({name, size, color}) {
   return (
   <View style={ styles.container }>
-      <MaterialCommunityIcons name={name} size={50} color="white" />
+      <MaterialCommunityIcons name={name} size={size} color={color} />
     </View>
   );
 };

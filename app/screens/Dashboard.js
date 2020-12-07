@@ -10,22 +10,20 @@ import Seperator from '../components/Seperator';
 export default function Dashboard(props) {
   return (
   <Screen style={ styles.container }>
-      <Text>Dashboard</Text>
-      <Seperator />
       <View style={ styles.row }>
       <TouchableOpacity onPress={() => console.log('clicked')}>
-        <Icon name="account" />
+        <Icon name="account" size={50} color="white" />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => console.log('clicked')}>
-        <Icon name="heart-multiple-outline" />
+          <Icon name="heart-multiple-outline" size={50} color="white" />
       </TouchableOpacity>
       </View>
       <View style={ styles.row }>
         <TouchableOpacity onPress={() => console.log('clicked')}>
-          <Icon name="graphql" />
+          <Icon name="graphql" size={50} color="white" />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => console.log('clicked')}>
-          <Icon name="airballoon" />
+          <Icon name="airballoon" size={50} color="white" />
         </TouchableOpacity>
       </View>
     </Screen>
