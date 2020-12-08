@@ -1,28 +1,30 @@
 import React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from "@react-navigation/native";
+
 import Icon from '../components/Icon';
 
-
 import Screen from '../components/Screen';
-import Seperator from '../components/Seperator';
 
 
-export default function Dashboard(props) {
+export default function Dashboard() {
+  const navigation = useNavigation()
   return (
+
   <Screen style={ styles.container }>
       <View style={ styles.row }>
-      <TouchableOpacity onPress={() => console.log('clicked')}>
+      <TouchableOpacity onPress={() => navigation.navigate('Home')}>
         <Icon name="account" size={50} color="white" />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => console.log('clicked')}>
+      <TouchableOpacity onPress={() => navigation.navigate('MileStones')}>
           <Icon name="heart-multiple-outline" size={50} color="white" />
       </TouchableOpacity>
       </View>
       <View style={ styles.row }>
-        <TouchableOpacity onPress={() => console.log('clicked')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Development')}>
           <Icon name="graphql" size={50} color="white" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => console.log('clicked')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Memories')}>
           <Icon name="airballoon" size={50} color="white" />
         </TouchableOpacity>
       </View>

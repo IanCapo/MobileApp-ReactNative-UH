@@ -4,13 +4,15 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import colors from '../utilities/colors';
 import Dashboard from '../screens/Dashboard';
-import MileStones from '../screens/MileStones';
+import AddScreen from '../screens/AddScreen';
 import Settings from '../screens/Settings';
 import AddButton from "./AddButton";
+import DashboardStack from './DashboardStack';
+
 
 const Tab = createBottomTabNavigator();
 
-export default function Navigator(props) {
+export default function Navigator() {
 
   return (
     <Tab.Navigator 
@@ -19,17 +21,17 @@ export default function Navigator(props) {
       showLabel: false
     }}
     >
-      <Tab.Screen name="dashboard" component={Dashboard} options={{
+      <Tab.Screen name="dashboard" component={DashboardStack} options={{
         tabBarIcon: () => 
         <MaterialCommunityIcons name="home" size={30} color={colors.primary} />
       }}
       />
       <Tab.Screen
         name="Add"
-        component={Dashboard}
-        options={() => ({
+        component={AddScreen}
+        options={({ navigation }) => ({
           tabBarButton: () =>
-            <AddButton onPress={() => console.log('add clicked')} />,
+            <AddButton onPress={() => navigation.navigate('Add')} />,
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="plus-circle"

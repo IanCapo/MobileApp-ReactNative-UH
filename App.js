@@ -1,18 +1,15 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
-import Dashboard from './app/screens/Dashboard';
-import MilesStones from './app/screens/MileStones';
-import Navigator from './app/navigation/Navigator';
-
+import TabNavigator from './app/navigation/TabNavigator';
 
 function App() {
   return (
+    <React.Fragment>
     <NavigationContainer >
-      <Navigator />
+      <TabNavigator />
     </NavigationContainer>
-    
+    </React.Fragment>
   );
 }
 
