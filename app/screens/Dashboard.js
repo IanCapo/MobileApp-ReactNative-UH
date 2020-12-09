@@ -13,7 +13,7 @@ export default function Dashboard() {
 
   <Screen style={ styles.container }>
       <View style={ styles.row }>
-      <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+      <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
         <Icon name="account" size={50} color="white" />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('MileStones')}>

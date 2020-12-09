@@ -1,10 +1,11 @@
 import React from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
 
-import Dashboard from '../screens/Dashboard';
 import MileStones from '../screens/MileStones';
 import DevelopmentScreen from '../screens/DevelopmentScreen';
 import MemoriesScreen from '../screens/MemoriesScreen';
+import ProfileScreen from '../screens/ProfileScreen';
+import Dashboard from '../screens/Dashboard';
 
 
 const Stack = createStackNavigator();
@@ -12,8 +13,12 @@ const Stack = createStackNavigator();
 const DashboardStack = () => (
   <Stack.Navigator>
     <Stack.Screen
-      name="Home"
+      name="Dashboard"
       component={Dashboard}
+      options={{ headerShown: false }} />
+    <Stack.Screen
+      name="Profile"
+      component={ProfileScreen}
       options={{ headerShown: false }} />
     <Stack.Screen
       name="MileStones"
