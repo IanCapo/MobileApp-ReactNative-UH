@@ -3,6 +3,7 @@ import { StyleSheet, Image} from 'react-native';
 
 import Screen from '../../app/components/Screen'
 import InputWithLabel from '../components/InputWithLabel';
+import initialState from '../../initialState.json';
 
 
 export default function ProfileScreen(props) {
@@ -12,12 +13,13 @@ export default function ProfileScreen(props) {
       <Image
         style={styles.image}
         source={ require('../assets/baby.jpeg')}
+        withEditOption={false}
       />
-      <InputWithLabel icon="alphabetical" placeholder="Name" />
-      <InputWithLabel icon="calendar" placeholder="DoB" />
-      <InputWithLabel icon="scale" placeholder="Weight" />
-      <InputWithLabel icon="human-male-height" placeholder="Height" />
-      <InputWithLabel icon="face" placeholder="Head circumference" />
+      <InputWithLabel icon="alphabetical" placeholder={initialState.name} type="text" withEditOption={false} />
+      <InputWithLabel icon="calendar" placeholder={initialState.dob} type="text" withEditOption={false} />
+      <InputWithLabel icon="scale" placeholder={initialState.weight.toString()} type="number" unit="g" withEditOption={false}  />
+      <InputWithLabel icon="human-male-height" placeholder={initialState.height.toString()} type="number" unit="cm" withEditOption={false} />
+      <InputWithLabel icon="face" placeholder={initialState.head.toString()} type="number" unit="cm" withEditOption={false} />
     </Screen>
   );
 };

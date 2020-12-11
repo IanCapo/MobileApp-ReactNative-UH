@@ -5,18 +5,20 @@ import colors from '../utilities/colors';
 import TextInput from './TextInput';
 import EditButton from './EditButton';
 
-export default function InputWithLabel({ icon, placeholder, withEditOption }) {
+export default function InputWithLabel({ icon, placeholder, withEditOption, type, focus  }) {
   const [editable, setEditable] = useState(false);
+
+
   return (
   <View style={styles.row}>
     <View style={ styles.container }>
     <MaterialCommunityIcons style={ styles.icon } name={ icon } size={30} />
-        <TextInput 
-          style={styles.inputField} 
-          placeholder={placeholder} 
-          editable={editable} 
+        <TextInput
+          style={styles.inputField}
+          placeholder={placeholder}
+          editable={editable}
           onFocus={editable}
-        />
+        /> 
       </View>
       {withEditOption && <EditButton onPress={() => setEditable(true)}/> }
     </View>
