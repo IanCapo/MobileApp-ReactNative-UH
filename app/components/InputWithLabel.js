@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import colors from '../utilities/colors';
 import TextInput from './TextInput';
 import EditButton from './EditButton';
 
-export default function InputWithLabel({ icon, placeholder, withEditOption, type, focus  }) {
+export default function InputWithLabel({ icon, placeholder, withEditOption, unit  }) {
   const [editable, setEditable] = useState(false);
 
 
@@ -18,7 +18,9 @@ export default function InputWithLabel({ icon, placeholder, withEditOption, type
           placeholder={placeholder}
           editable={editable}
           onFocus={editable}
+          unit={unit}
         /> 
+        { unit && <Text style={styles.unit}>{unit}</Text> }
       </View>
       {withEditOption && <EditButton onPress={() => setEditable(true)}/> }
     </View>
@@ -44,5 +46,9 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     alignItems: "center"
+  },
+  unit: {
+    position: "absolute",
+    right: 20
   }
 });

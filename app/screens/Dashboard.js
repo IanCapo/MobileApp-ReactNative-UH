@@ -15,7 +15,7 @@ export default function Dashboard() {
   <Screen style={ styles.container }>
       <View style={ styles.row }>
       <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-        <Icon name="account" size={50} color="white" backgroundColor={colors.secondary} />
+          <Icon name="account-badge-horizontal-outline" size={50} color="white" backgroundColor={colors.secondary} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('MileStones')}>
           <Icon name="heart-multiple-outline" size={50} color="white" backgroundColor={colors.secondary} />
@@ -23,7 +23,7 @@ export default function Dashboard() {
       </View>
       <View style={ styles.row }>
         <TouchableOpacity onPress={() => navigation.navigate('Development')}>
-          <Icon name="graphql" size={50} color="white" backgroundColor={colors.secondary} />
+          <Icon name="chart-line" size={50} color="white" backgroundColor={colors.secondary} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Memories')}>
           <Icon name="airballoon" size={50} color="white" backgroundColor={colors.secondary} />

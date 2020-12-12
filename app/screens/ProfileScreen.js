@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Image} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import Screen from '../../app/components/Screen'
 import InputWithLabel from '../components/InputWithLabel';
@@ -15,7 +15,7 @@ export default function ProfileScreen(props) {
         style={styles.image}
         withEditOption={false}
       />
-      <InputWithLabel icon="alphabetical" placeholder={initialState.name} type="text" withEditOption={true} />
+      <InputWithLabel icon="baby-bottle-outline" placeholder={initialState.name} type="text" withEditOption={true} />
       <InputWithLabel icon="calendar" placeholder={initialState.dob} type="text" withEditOption={true} />
       <InputWithLabel icon="scale" placeholder={initialState.weight.toString()} type="number" unit="g" withEditOption={true}  />
       <InputWithLabel icon="human-male-height" placeholder={initialState.height.toString()} type="number" unit="cm" withEditOption={true} />
