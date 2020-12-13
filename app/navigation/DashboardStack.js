@@ -6,12 +6,13 @@ import DevelopmentScreen from '../screens/DevelopmentScreen';
 import MemoriesScreen from '../screens/MemoriesScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import Dashboard from '../screens/Dashboard';
+import MemoryDetailsScreen from '../screens/MemoryDetailsScreen';
 
 
 const Stack = createStackNavigator();
 
 const DashboardStack = () => (
-  <Stack.Navigator>
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen
       name="Dashboard"
       component={Dashboard}
@@ -29,6 +30,10 @@ const DashboardStack = () => (
     <Stack.Screen
       name="Memories"
       component={MemoriesScreen} />
+    <Stack.Screen
+      name="MemoryDetail"
+      component={MemoryDetailsScreen}
+      options={{ headerShown: true }} />
   </Stack.Navigator>
 )
 
