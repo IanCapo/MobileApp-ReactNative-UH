@@ -3,12 +3,13 @@ import { View, StyleSheet, Text, ImageBackground } from 'react-native';
 import colors from '../utilities/colors';
 
 import Screen from '../components/Screen';
+import ImageInput from '../components/ImageInput';
 
 export default function MemoryDetailsScreen({ route }) {
   const { key, otherParam } = route.params;
   return (
   <Screen key={key} style={ styles.container }>
-      <ImageBackground source={{ uri: otherParam.image }} style={styles.image} resizeMode="center" />
+      <ImageInput existingImage={otherParam.image} style={styles.image} type="galery"/>
       <View style={styles.detailsContainer}>
         <Text style={styles.title}>{otherParam.title}</Text>
         <Text style={styles.date}>{otherParam.date}</Text>
@@ -38,6 +39,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 300,
     backgroundColor: 'white',
+    resizeMode: 'cover'
   },
   title: {
     fontSize: 20,

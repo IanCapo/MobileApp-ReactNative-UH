@@ -7,9 +7,8 @@ import Icon from '../../app/components/Icon'
 import ImageWithIcon from './ImageWithIcon';
 
 
-export default function ImageInput(type, existingImage) {
-  console.log(existingImage);
-  const [image, setImage] = existingImage.uri ? useState(existingImage) : useState(null);
+export default function ImageInput({type, existingImage }) {
+  const [image, setImage] = existingImage ? useState(existingImage.url) : useState(null);
   useEffect(() => {
     (async () => {
       if (Platform.OS !== 'web') {
@@ -35,11 +34,11 @@ export default function ImageInput(type, existingImage) {
   };
 
   const renderImage = (type) => {
-    if (type.type === 'galery') {
-      return <Image source={{ uri: image }} style={styles.image} />
+    if (type === 'galery') {
+      return <Image source={{ uri: image }} style={ styles.image } />
     }
     else {
-      return <ImageWithIcon image={image} />
+      return <ImageWithIcon image={image} style={ styles.image }/>
     }
   }
 
@@ -64,6 +63,6 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     borderRadius: 15,
-    marginBottom: 20
+    marginBottom: 20,
   }
 });

@@ -4,10 +4,10 @@ import colors from '../utilities/colors';
 
 import Icon from './Icon'
 
-export default function ImageWithIcon(image) {
+export default function ImageWithIcon({image}) {
   return (
   <View>
-    <Image source={{ uri: image.image }} style={ styles.image} />
+    <Image source={{ uri: image }} style={ styles.image } />
     <Icon name="camera" size={30} color="darkgrey" backgroundColor={colors.primary} style={styles.icon} />
     </View>
   );
