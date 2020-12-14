@@ -7,15 +7,14 @@ import initialState from '../../initialState.json';
 import ImageInput from '../../app/components/ImageInput'
 
 
-export default function ProfileScreen(props) {
-
+export default function ProfileScreen() {
   return (
     <Screen style={ styles.container }>
       <ImageInput
         style={styles.image}
-        withEditOption={false}
+        existingImage={ initialState.image }
       />
-      <InputWithLabel icon="baby-bottle-outline" placeholder={initialState.name} type="text" withEditOption={true} />
+      <InputWithLabel icon="baby-bottle-outline" placeholder={initialState.name}  type="text" withEditOption={true} />
       <InputWithLabel icon="calendar" placeholder={initialState.dob} type="text" withEditOption={true} />
       <InputWithLabel icon="scale" placeholder={initialState.weight.toString()} type="number" unit="g" withEditOption={true}  />
       <InputWithLabel icon="human-male-height" placeholder={initialState.height.toString()} type="number" unit="cm" withEditOption={true} />
@@ -36,5 +35,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 10,
     alignSelf: "flex-start",
+  },
+  image: {
+    marginRight: 10
   }
 });

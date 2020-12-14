@@ -1,17 +1,35 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
-export default function MemoriesScreen(props) {
+import initialState from "../../initialState.json"; 
+import Screen from '../components/Screen';
+
+
+export default function MemoriesScreen({navigation}) {
+const memories = initialState.memories;
   return (
-  <View style={ styles.container }>
-<Text> MemoriesScreen</Text>
-    </View>
+  <Screen style={ styles.container }>
+      { memories.map((memory) => (
+        <TouchableOpacity key={memory.id} onPress={() => navigation.navigate('MemoryDetail', {otherParam: memory})}>
+          <Image source={{ uri: memory.image.url }} style={styles.image} />
+        </TouchableOpacity>
+      )) }
+    </Screen>
   );
 };
 
 
 const styles = StyleSheet.create({
   container: {
-    
+    padding: 30,
+    flexDirection: "row",
+    justifyContent: "center",
+    flexWrap: "wrap"
+  },
+  image: {
+    width: 120,
+    height: 120,
+    borderRadius: 15,
+    margin: 10
   }
 });

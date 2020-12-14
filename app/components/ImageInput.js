@@ -7,8 +7,8 @@ import Icon from '../../app/components/Icon'
 import ImageWithIcon from './ImageWithIcon';
 
 
-export default function ImageInput() {
-  const [image, setImage] = useState(null);
+export default function ImageInput({type, existingImage }) {
+  const [image, setImage] = existingImage ? useState(existingImage.url) : useState(null);
   useEffect(() => {
     (async () => {
       if (Platform.OS !== 'web') {
@@ -33,11 +33,20 @@ export default function ImageInput() {
     }
   };
 
+  const renderImage = (type) => {
+    if (type === 'galery') {
+      return <Image source={{ uri: image }} style={ styles.image } />
+    }
+    else {
+      return <ImageWithIcon image={image} style={ styles.image }/>
+    }
+  }
+
   return (
-    <TouchableWithoutFeedback style={styles.container} onPress={pickImage}>
+    <TouchableWithoutFeedback style={[styles.container]} onPress={pickImage}>
       <View>
         {!image && <Icon name="camera" size={50} color="darkgrey" backgroundColor={colors.primary} /> }
-        {image &&  <ImageWithIcon image={image} /> }
+        {image && renderImage(type) }
         </View>
     </TouchableWithoutFeedback>
   );
@@ -49,5 +58,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center"
+  },
+  image: {
+    width: 120,
+    height: 120,
+    borderRadius: 15,
+    marginBottom: 20,
   }
 });
