@@ -7,7 +7,7 @@ import Icon from '../../app/components/Icon'
 import ImageWithIcon from './ImageWithIcon';
 
 
-export default function ImageInput({type, existingImage }) {
+export default function ImageInput({type, existingImage, onPress }) {
   const [image, setImage] = existingImage ? useState(existingImage.url) : useState(null);
   useEffect(() => {
     (async () => {
@@ -30,6 +30,7 @@ export default function ImageInput({type, existingImage }) {
 
     if (!result.cancelled) {
       setImage(result.uri);
+      onPress(result.uri)
     }
   };
 
