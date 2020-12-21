@@ -1,15 +1,13 @@
 import React from 'react';
-import { View, StyleSheet, Text, ImageBackground } from 'react-native';
-import colors from '../utilities/colors';
+import { View, StyleSheet, Text, Image } from 'react-native';
 
 import Screen from '../components/Screen';
-import ImageInput from '../components/ImageInput';
 
 export default function MemoryDetailsScreen({ route }) {
   const { key, otherParam } = route.params;
   return (
   <Screen key={key} style={ styles.container }>
-      <ImageInput existingImage={otherParam.image} style={styles.image} type="galery"/>
+      <Image source={otherParam.image} style={styles.image} />
       <View style={styles.detailsContainer}>
         <Text style={styles.title}>{otherParam.title}</Text>
         <Text style={styles.date}>{otherParam.date}</Text>
