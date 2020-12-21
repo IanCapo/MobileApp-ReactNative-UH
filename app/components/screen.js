@@ -4,7 +4,7 @@ import { View, StyleSheet, SafeAreaView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 
-export default function screen({children, style}) {
+export default function Screen({children, style}) {
   return (
     <KeyboardAwareScrollView style={styles.screen}>
       <SafeAreaView style={styles.view}>
