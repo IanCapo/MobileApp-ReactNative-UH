@@ -1,18 +1,33 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { StyleSheet } from 'react-native';
+
+import Screen from "../components/Screen";
+import ProgressItem from "../components/ProgressItem";
+import initialState from '../../initialState';
 
 
-export default function MilesStones(props) {
+export default function MilesStones({ navigation }) {
   return (
-  <View style={ styles.container }>
-      <Text>Milestones</Text>
-    </View>
+  <Screen style={ styles.container }>
+    { initialState.milestones.map((item, index) => (
+        <ProgressItem 
+          onPress={() => navigation.navigate('MilestoneDetail', { otherParam: item })} 
+          lastItem={index === initialState.milestones.length - 1}
+          text={item.title}
+          icon={item.icon}
+          date={item.date}
+          key={item.id}
+          />
+        )
+      ) 
+    }
+    </Screen>
   );
 };
 
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "blue"
+    padding: 30
   }
 });
