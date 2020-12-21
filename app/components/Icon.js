@@ -1,15 +1,23 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from '../utilities/colors';
 
-export default function Icon({ backgroundColor, name, size, color, style }) {
-  return (
-  <View style={ style ? style : styles.container } backgroundColor={ backgroundColor ? backgroundColor : colors.primary }>
-      <MaterialCommunityIcons name={name} size={size} color={color}  />
-    </View>
-  );
+export default function Icon({ backgroundColor, name, size, color, style, onPress }) {
+  if(onPress) {
+    return (
+      <TouchableOpacity style={style ? style : styles.container} backgroundColor={backgroundColor ? backgroundColor : colors.primary} onPress={onPress} >
+        <MaterialCommunityIcons name={name} size={size} color={color} />
+      </TouchableOpacity>
+    )
+    } else {
+      return (
+        <View style={style ? style : styles.container} backgroundColor={backgroundColor ? backgroundColor : colors.primary} >
+          <MaterialCommunityIcons name={name} size={size} color={color} />
+        </View>
+      );
+    }
 };
 
 

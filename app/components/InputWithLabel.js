@@ -5,21 +5,28 @@ import colors from '../utilities/colors';
 import TextInput from './TextInput';
 import EditButton from './EditButton';
 
-export default function InputWithLabel({ icon, placeholder, withEditOption, unit  }) {
-  const [editable, setEditable] = useState(false);
-
-
+export default function InputWithLabel({ icon, placeholder, isEditable, unit, withEditOption = true  }) {
+  const [editable, setEditable] = useState(isEditable);
+  
   return (
   <View style={styles.row}>
     <View style={ styles.container }>
     <MaterialCommunityIcons style={ styles.icon } name={ icon } size={30} />
-        <TextInput
+       {!isEditable &&  <TextInput
           style={styles.inputField}
           placeholder={placeholder}
           editable={editable}
           onFocus={editable}
           unit={unit}
-        /> 
+        />
+      }
+        {isEditable && <TextInput
+          style={styles.inputField}
+          placeholder={placeholder}
+          editable={true}
+          onFocus={editable}
+          unit={unit}
+        />}
         { unit && <Text style={styles.unit}>{unit}</Text> }
       </View>
       {withEditOption && <EditButton onPress={() => setEditable(true)}/> }
@@ -30,7 +37,7 @@ export default function InputWithLabel({ icon, placeholder, withEditOption, unit
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.secondary,
     borderRadius: 25,
     flexDirection: "row",
     alignItems: "center",
