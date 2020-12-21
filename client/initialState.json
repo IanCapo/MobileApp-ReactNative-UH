@@ -1,0 +1,102 @@
+{
+  "name": "baby",
+  "dob": "09.06.2020",
+  "weight": 2640,
+  "height": 46.5,
+  "head": 48,
+  "image": {
+    "id": "initImage1",
+    "url": "/Users/fabian/Documents/University of Hertfordshire/Mobile Computing/Assignment_2/my-baby/app/assets/_R9A9401.jpg"
+  },
+  "memories": [
+    {"title": "Memory 1",
+      "id": 1,
+      "date": "09.06.2020",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eu semper est, nec fringilla libero. Vestibulum quis aliquam neque, non suscipit mauris. Integer a dolor ac erat ultrices aliquet et ac tellus. Nulla pulvinar rhoncus nisl eu rhoncus. Integer facilisis magna eu massa tincidunt elementum. Vivamus eu mi auctor, lobortis sapien a, lobortis neque. Morbi sit amet euismod velit. Praesent arcu mi, finibus vitae leo id, fermentum tempor turpis. Nunc urna elit, ornare et malesuada quis, semper ut tortor. Curabitur facilisis nunc vitae orci mollis accumsan. Morbi vel dui sit amet ante eleifend tempor id in nibh. Praesent eget cursus eros, viverra ultrices dolor. Morbi ac libero vestibulum, feugiat ex sit amet, tincidunt tortor. Nulla tincidunt congue ante.",
+      "image": {
+       "url": "/Users/fabian/Documents/University of Hertfordshire/Mobile Computing/Assignment_2/my-baby/app/assets/_R9A9401.jpg"
+      }
+    },
+    {
+      "title": "Memory 2",
+      "id": 2,
+      "date": "10.06.2020",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eu semper est, nec fringilla libero. Vestibulum quis aliquam neque, non suscipit mauris. Integer a dolor ac erat ultrices aliquet et ac tellus. Nulla pulvinar rhoncus nisl eu rhoncus. Integer facilisis magna eu massa tincidunt elementum. Vivamus eu mi auctor, lobortis sapien a, lobortis neque. Morbi sit amet euismod velit. Praesent arcu mi, finibus vitae leo id, fermentum tempor turpis. Nunc urna elit, ornare et malesuada quis, semper ut tortor. Curabitur facilisis nunc vitae orci mollis accumsan. Morbi vel dui sit amet ante eleifend tempor id in nibh. Praesent eget cursus eros, viverra ultrices dolor. Morbi ac libero vestibulum, feugiat ex sit amet, tincidunt tortor. Nulla tincidunt congue ante.",
+        "image": {
+          "url": "/Users/fabian/Documents/University of Hertfordshire/Mobile Computing/Assignment_2/my-baby/app/assets/_R9A9401.jpg"
+        } 
+      }
+  ],
+  "images": [
+    {"type": "album",
+      "title":"image",
+      "url": "/Users/fabian/Documents/University of Hertfordshire/Mobile Computing/Assignment_2/my-baby/app/assets/favicon.png",
+      "path": "path"},
+    {"title": "image", 
+      "url": "/Users/fabian/Documents/University of Hertfordshire/Mobile Computing/Assignment_2/my-baby/app/assets/favicon.png"},
+    {
+      "title": "image",
+      "url": "/Users/fabian/Documents/University of Hertfordshire/Mobile Computing/Assignment_2/my-baby/app/assets/favicon.png"
+    },
+    {
+      "title": "image",
+      "url": "/Users/fabian/Documents/University of Hertfordshire/Mobile Computing/Assignment_2/my-baby/app/assets/favicon.png"
+    },
+    {
+      "title": "image",
+      "url": "/Users/fabian/Documents/University of Hertfordshire/Mobile Computing/Assignment_2/my-baby/app/assets/favicon.png"
+    }
+  ],
+  "developmentData": [
+    {"date": "09.06.2020", "percentile": 10},
+    {"date": "09.07.2020", "percentile": 20},
+    {"date": "09.08.2020", "percentile": 25},
+    {"date": "09.09.2020", "percentile": 27},
+    {"date": "09.10.2020", "percentile": 27},
+    {"date": "09.11.2020", "percentile": 30}
+  ] ,
+  "milestones" : [
+    {
+      "title": "I am born",
+      "id": 1245834,
+      "icon": "baby-carriage",
+      "date":"09.06.2020",
+      "image": "/Users/fabian/Documents/University of Hertfordshire/Mobile Computing/Assignment_2/my-baby/app/assets/favicon.png",
+      "info": "Babies usually take their first steps around 8-12 months"
+    },
+    {
+      "title": "My first bottle", 
+      "id": 234234, 
+      "icon": "baby-bottle-outline", 
+      "date": "10.06.2020", 
+      "image": null},
+    {
+      "title": "My first smile", 
+      "id": 343422344,
+      "icon": "baby-face-outline", 
+      "date": null, 
+      "image": null
+    },
+    {
+      "title": "I can sit", 
+      "id": 2345582392, 
+      "icon": "foot-print", 
+      "date": null, 
+      "image": null
+    },
+    {
+      "title": "I can stand", 
+      "id": 9237523,
+      "icon": "foot-print", 
+      "date": null, 
+      "image": null
+    },
+    {
+      "title": "First step", 
+      "id": 8236253523,
+      "icon": "foot-print", 
+      "date": null, 
+      "image": null
+    }
+  ]
+}
