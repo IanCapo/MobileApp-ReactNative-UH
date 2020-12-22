@@ -17,4 +17,19 @@ let memories = [
       "url": "/Users/fabian/Documents/University of Hertfordshire/Mobile Computing/A_2/client/app/assets/_R9A9401.jpg"
     }
   }
-]
+];
+
+const getMemories = () => memories;
+
+const getMemoryById = (id) => memories.find((memory) => memory.id === id);
+
+const addMemory = (memory) => {
+  memory.id = memories.length + 1;
+  memories.push(memory)
+}
+
+module.exports = {
+  getMemories,
+  getMemoryById,
+  addMemory
+};
