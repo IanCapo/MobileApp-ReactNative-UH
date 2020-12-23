@@ -4,7 +4,9 @@ let milestones = [
     "id": 1,
     "icon": "baby-carriage",
     "date": "09.06.2020",
-    "image": "/Users/fabian/Documents/University of Hertfordshire/Mobile Computing/A_2/client/app/assets/_R9A9401.jpg",
+    "image": {
+      "url" : "/Users/fabian/Documents/University of Hertfordshire/Mobile Computing/A_2/client/app/assets/_R9A9401.jpg"
+    },
     "info": "Babies usually take their first steps around 8-12 months"
   },
   {
@@ -12,35 +14,45 @@ let milestones = [
     "id": 2,
     "icon": "baby-bottle-outline",
     "date": "10.06.2020",
-    "image": null
+    "image": {
+      "url": null
+    }
   },
   {
     "title": "My first smile",
     "id": 3,
     "icon": "baby-face-outline",
     "date": null,
-    "image": null
+    "image": {
+      "url": null
+    }
   },
   {
     "title": "I can sit",
     "id": 4,
     "icon": "foot-print",
     "date": null,
-    "image": null
+    "image": {
+      "url": null
+    }
   },
   {
     "title": "I can stand",
     "id": 5,
     "icon": "foot-print",
     "date": null,
-    "image": null
+    "image": {
+      "url": null
+    }
   },
   {
     "title": "First step",
     "id": 6,
     "icon": "foot-print",
     "date": null,
-    "image": null
+    "image": {
+      "url": null
+    }
   }
 ];
 
@@ -55,8 +67,15 @@ const addMilestone = (milestone) => {
   milestones.push(milestone)
 }
 
+const updateMilestone = (milestone, key, value) => {
+  key === "image" ? milestone[key].url = value : milestone[key] = value;
+  
+}
+
+
 module.exports = {
   getMilestones,
   getMilestoneById,
-  addMilestone
+  addMilestone,
+  updateMilestone
 };

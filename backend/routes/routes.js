@@ -19,7 +19,15 @@ const router = app => {
  app.post('/memories', (req, res) => {
    memories.addMemory(req.body)
    res.status(201).send(`Added memory with id ${req.body.id}`)
- })
+ });
+
+  app.put('/memories/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const memory = memories.getMemoryById(id);
+
+    memories.updateMemory(memory, req.body.key, req.body.value)
+    res.send(memory);
+  });
 
 
 // milestones
@@ -34,14 +42,20 @@ const router = app => {
     res.send({
       milestone
     })
+  });
+
+  app.post('/milestones', (req, res) => {
+    milestones.addMilestone(req.body)
+    res.status(201).send(`Added milestone with id ${req.body.id}`)
   })
+
+  app.put('/milestones/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const milestone = milestones.getMilestoneById(id);
+
+    milestones.updateMilestone(milestone, req.body.key, req.body.value)
+    res.send(milestone);
+  });
 };
-
-app.post('/milestones', (req, res) => {
-  milestones.addMilestone(req.body)
-  res.status(201).send(`Added milestone with id ${req.body.id}`)
-})
-
-
 
 module.exports = router;

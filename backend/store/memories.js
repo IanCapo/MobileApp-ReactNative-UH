@@ -28,8 +28,17 @@ const addMemory = (memory) => {
   memories.push(memory)
 }
 
+const updateMemory = (memory, key, value) => {
+  if(key === "image") {
+    memory[key]["url"] = value
+  } else {
+    memory[key] = value
+  }
+}
+
 module.exports = {
   getMemories,
   getMemoryById,
-  addMemory
+  addMemory,
+  updateMemory
 };
