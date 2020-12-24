@@ -47,7 +47,7 @@ const router = app => {
   app.post('/milestones', (req, res) => {
     milestones.addMilestone(req.body)
     res.status(201).send(`Added milestone with id ${req.body.id}`)
-  })
+  });
 
   app.put('/milestones/:id', (req, res) => {
     const id = parseInt(req.params.id);
