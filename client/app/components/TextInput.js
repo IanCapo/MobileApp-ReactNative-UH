@@ -11,7 +11,6 @@ const FormTextInput = ({ placeholder, editable, focused }) => {
         editable={editable}
         onFocus={focused}
       />
-
   );
 }
 

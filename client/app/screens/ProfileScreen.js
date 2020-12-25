@@ -1,21 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Image, Text } from 'react-native';
 
 import Screen from '../../app/components/Screen'
 import InputWithLabel from '../components/InputWithLabel';
-import initialState from '../../initialState.json';
 import ImageInput from '../../app/components/ImageInput'
 import Icon from '../components/Icon';
 
 import useApi from '../hooks/useApi';
 import usePutData from '../hooks/usePutData';
+import colors from '../utilities/colors';
 
 
 export default function ProfileScreen() {
   const { data, loading, error } = useApi("profile");
   const [editable, setEditable] = useState(false)
-  const [image, setImage] = useState();
-
 
   const renderImage = () => {
     if(editable) {
@@ -37,7 +35,6 @@ export default function ProfileScreen() {
   }
 
   const changeImageAppearance = (payload) => {
-    setImage(payload);
     usePutData('profile', [{ "key": "image", "value": payload }])
   }
 
@@ -45,44 +42,49 @@ export default function ProfileScreen() {
     return (
       <Screen style={ styles.container }>
         { !editable ? renderImage() : renderImage() }
-        <InputWithLabel 
-          icon="baby-bottle-outline" 
-          placeholder={data.name} 
-          type="text" 
-          isEditable={editable} 
-          withEditOption={true} />
-        <InputWithLabel 
-          icon="calendar" 
-          placeholder={data.dob} 
-          type="text" 
-          isEditable={editable} 
-          withEditOption={editable} />
-        <InputWithLabel 
-          icon="scale" 
-          placeholder={data.weight.toString()} 
-          type="number" 
-          unit="g" 
-          isEditable={editable} 
-          withEditOption={editable} />
-        <InputWithLabel 
-          icon="human-male-height" 
-          placeholder={data.height.toString()} 
-          type="number" 
-          unit="cm" 
-          isEditable={editable} 
-          withEditOption={editable} />
-        <InputWithLabel 
-          icon="face" 
-          placeholder={data.head.toString()} 
-          type="number" 
-          unit="cm" 
-          isEditable={editable} 
-          withEditOption={editable} />
-        <Icon 
-          name="border-color" 
-          size={30} 
-          style={styles.icon} 
-          onPress={() => setEditable(true)} />
+          <InputWithLabel 
+            icon="baby-bottle-outline" 
+            placeholder={data.name} 
+            type="text" 
+            isEditable={editable} 
+            withEditOption={editable} />
+          <InputWithLabel 
+            icon="calendar" 
+            placeholder={data.dob} 
+            type="text" 
+            isEditable={editable} 
+            withEditOption={editable} />
+          <InputWithLabel 
+            icon="scale" 
+            placeholder={data.weight.toString()} 
+            type="number" 
+            unit="g" 
+            isEditable={editable} 
+            withEditOption={editable} />
+          <InputWithLabel 
+            icon="human-male-height" 
+            placeholder={data.height.toString()} 
+            type="number" 
+            unit="cm" 
+            isEditable={editable} 
+            withEditOption={editable} />
+          <InputWithLabel 
+            icon="face" 
+            placeholder={data.head.toString()} 
+            type="number" 
+            unit="cm" 
+            isEditable={editable} 
+            withEditOption={editable} />
+            {editable && <Icon 
+              name="check" 
+              size={30} 
+              style={styles.iconCheck} 
+              onPress={() => console.log('saved pressed')} />}
+            {!editable && <Icon 
+              name="border-color" 
+              size={30} 
+              style={styles.iconEdit} 
+              onPress={() => setEditable(true)} /> }
       </Screen>
     ); 
   } else if (loading) {
@@ -111,14 +113,24 @@ const styles = StyleSheet.create({
     marginTop: 10,
     alignSelf: "flex-start",
   },
-  icon: {
+  iconEdit: {
+    width: 50,
+    height: 50,
+    paddingTop: 7,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: "flex-end",
+    backgroundColor: colors.yellow
+  },
+  iconCheck: {
     width: 50,
     height: 50,
     borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 7,
-    alignSelf: "flex-end"
+    alignSelf: "flex-end",
+    backgroundColor: colors.green
   },
   image: {
     width: 140,
