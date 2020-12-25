@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
 
 import Screen from '../components/Screen';
-import useApi from '../hooks/useApi'
+import useApi from '../hooks/useApi';
 
 
 export default function MemoriesScreen({navigation}) {

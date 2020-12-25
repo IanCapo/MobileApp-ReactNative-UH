@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 const baseURL = "http://localhost:3002/";
 
@@ -22,4 +22,4 @@ export default function useFetch(url) {
   }, [])
 
   return { data, loading, error }
-}
+};

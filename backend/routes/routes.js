@@ -1,5 +1,6 @@
 const memories = require('../store/memories');
 const milestones = require('../store/milestones');
+const myProfile = require('../store/profile');
 
 const router = app => {
   // memories
@@ -55,6 +56,20 @@ const router = app => {
 
     milestones.updateMilestone(milestone, req.body.key, req.body.value)
     res.send(milestone);
+  });
+
+  // profile
+  app.get('/profile', (req, res) => {
+    res.send(myProfile.getProfile())
+  });
+
+  app.put('/profile', (req, res) => {
+    const profile = myProfile.getProfile();
+    const data = req.body;
+    for(let i = 0; i < data.length; i++) {
+      myProfile.updateProfile(profile, data[i].key, data[i].value)
+    }
+    res.send(profile);
   });
 };
 
