@@ -1,15 +1,20 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
 import Screen from "../components/Screen";
 import ProgressItem from "../components/ProgressItem";
 import initialState from '../../initialState';
+import useApi from '../hooks/useApi'
 
 
 export default function MilesStones({ navigation }) {
+  const { data, loading, error } = useApi("milestones");
+
   return (
   <Screen style={ styles.container }>
-    { initialState.milestones.map((item, index) => (
+    {loading && <Text>Please wait while we're fetching your data</Text>}
+    {error && <Text>Sorry, we couldn't fetch your data</Text>}
+    {data && data.map((item, index) => (
         <ProgressItem 
           onPress={() => navigation.navigate('MilestoneDetail', { otherParam: item })} 
           lastItem={index === initialState.milestones.length - 1}

@@ -1,15 +1,20 @@
 import React from 'react';
-import { StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
 
-import initialState from "../../initialState.json"; 
 import Screen from '../components/Screen';
+import useApi from '../hooks/useApi';
 
 
 export default function MemoriesScreen({navigation}) {
-const memories = initialState.memories;
+
+ const { data, loading, error } = useApi("memories");
+ 
+
   return (
   <Screen style={ styles.container }>
-      { memories.map((memory) => (
+      {loading && <Text>Please wait while we're fetching your data</Text>}
+      {error && <Text>Sorry, we couldn't fetch your data</Text>}
+      {data && data.map((memory) => (
         <TouchableOpacity key={memory.id} onPress={() => navigation.navigate('MemoryDetail', {otherParam: memory})}>
           <Image source={{ uri: memory.image.url }} style={styles.image} />
         </TouchableOpacity>
