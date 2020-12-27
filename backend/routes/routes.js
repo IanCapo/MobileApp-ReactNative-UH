@@ -19,7 +19,7 @@ const router = app => {
 
  app.post('/memories', (req, res) => {
    memories.addMemory(req.body)
-   res.status(201).send(`Added memory with id ${req.body.id}`)
+   res.status(201).send('Added memory')
  });
 
   app.put('/memories/:id', (req, res) => {
