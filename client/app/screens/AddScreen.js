@@ -3,10 +3,12 @@ import { View, StyleSheet } from 'react-native';
 
 import usePostData from '../hooks/usePostData';
 import Screen from '../components/Screen';
-import ProfileForm from '../components/ProfileForm';
-import MemoriesForm from '../components/MemoriesForm';
 import CategoryPickerItem from '../components/CategoryPickerItem';
 import usePutData from '../hooks/usePutData';
+
+import ProfileForm from '../components/ProfileForm';
+import MemoriesForm from '../components/MemoriesForm';
+import MilestonesForm from '../components/MilestonesForm';
 
 export default function AddScreen(props) {
   const [category, setCategory] = useState('profile');
@@ -30,8 +32,8 @@ export default function AddScreen(props) {
 
   const initialValues = {
     profile: { "name": "", "dob": "", "weight": "", "height": "", "headcircumference":"" },
-    memories: { "title": "", "description": "", "date": ""},
-    milestones: { "title": "", "description": "", "date": "" }
+    memories: { "title": "", "description": "" },
+    milestones: { "title": "", "icon": ""  }
   }
 
   return (
@@ -49,6 +51,12 @@ export default function AddScreen(props) {
   }
       { category === "memories" &&
         <MemoriesForm
+          initialValues={initialValues.memories}
+          onPress={body => handleSubmit(body)}
+        />
+      }
+      { category === "milestones" &&
+        <MilestonesForm
           initialValues={initialValues.memories}
           onPress={body => handleSubmit(body)}
         />

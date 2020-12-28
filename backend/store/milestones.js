@@ -69,9 +69,7 @@ const addMilestone = (milestone) => {
 
 const updateMilestone = (milestone, key, value) => {
   key === "image" ? milestone[key].url = value : milestone[key] = value;
-  
 }
-
 
 module.exports = {
   getMilestones,

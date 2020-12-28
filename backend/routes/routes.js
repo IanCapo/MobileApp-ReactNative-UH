@@ -30,7 +30,6 @@ const router = app => {
     res.send(memory);
   });
 
-
 // milestones
   app.get('/milestones', (req, res) => {
     res.send(milestones.getMilestones())

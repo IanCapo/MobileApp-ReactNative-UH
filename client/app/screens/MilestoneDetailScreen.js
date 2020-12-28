@@ -7,7 +7,7 @@ export default function MilestoneDetailScreen({ route }) {
   const { key, otherParam } = route.params;
   return (
     <Screen key={key} style={styles.container}>
-      <Image source={{uri: otherParam.image}} style={styles.image} />
+      <Image source={{uri: otherParam.image.url}} style={styles.image} />
       <View style={styles.detailsContainer}>
         <Text style={styles.title}>{otherParam.title}</Text>
         <Text style={styles.date}>{otherParam.date}</Text>
