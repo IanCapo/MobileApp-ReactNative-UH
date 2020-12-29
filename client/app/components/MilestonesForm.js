@@ -7,16 +7,19 @@ import colors from '../utilities/colors';
 import Icon from './Icon';
 import ImageInput from './ImageInput';
 import DatePicker from './DatePicker';
+import IconPicker from './IconPicker';
 
 
 export default function Form({ initialValues, onPress }) {
   const [image, setImage] = useState();
-  const [date, setDate] = useState()
+  const [date, setDate] = useState();
+  const [myIcon, setMyIcon] = useState();
   let img = image;
 
   const handleSubmit = (data) => {
     const body = {
       "title": data["title"],
+      "icon": myIcon,
       "date": date,
       "description": data["description"],
       "image": { url: img }
@@ -38,7 +41,6 @@ export default function Form({ initialValues, onPress }) {
       {({ values, handleChange, setFieldTouched, touched, errors, handleSubmit }) => (
         <React.Fragment>
         <ImageInput value={values.image} onPress={value => setImage(value)} />
-        
         <Text style={ styles.text }>Title</Text>
           <TextInput
             value={values.title}
@@ -65,6 +67,7 @@ export default function Form({ initialValues, onPress }) {
           {touched.description && errors.description &&
             <Text style={{ fontSize: 10, color: 'red' }}>{errors.description}</Text>
           }
+          <IconPicker onPress={icon => setMyIcon(icon)} />
           <Icon
             name='check'
             onPress={handleSubmit}
