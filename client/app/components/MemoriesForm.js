@@ -1,30 +1,34 @@
 import React, { useState } from 'react'
-import { StyleSheet, TextInput, Text } from 'react-native';
+import { StyleSheet, TextInput, Text, View } from 'react-native';
 import * as Yup from "yup";
 
 import { Formik } from 'formik';
 import colors from '../utilities/colors';
 import Icon from './Icon';
 import ImageInput from '../components/ImageInput';
+import DatePicker from './DatePicker';
 
 
 export default function Form({ initialValues, onPress }) {
+  const [isReset, setIsReset] = useState(true)
   const [image, setImage] = useState();
+  const [date, setDate] = useState(new Date());
   let img = image;
 
-  const handleSubmit = (data) => {
+  const handleSubmit = (data, {resetForm}) => {
     const body = {
       "title": data["title"],
-      "date": data["date"],
+      "date": date,
       "description": data["description"],
       "image": { url: img }
     }
     onPress(body);
+    resetForm();
+    setImage(null);
   };
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required().min(1).label("Title"),
-    date: Yup.string().required().label("Date of Birth"),
     description: Yup.string().required().label("Description")
   });
 
@@ -35,8 +39,8 @@ export default function Form({ initialValues, onPress }) {
       validationSchema={validationSchema}
     >
       {({ values, handleChange, setFieldTouched, touched, isValid, errors, handleSubmit }) => (
-        <React.Fragment>
-        <ImageInput value={values.image} onPress={value => setImage(value)} />
+        <View style={ styles.container }>
+        <ImageInput value={values.image} style={ styles.image } onPress={value => setImage(value)} />
         <Text style={ styles.text }>Title</Text>
           <TextInput
             value={values.title}
@@ -50,17 +54,7 @@ export default function Form({ initialValues, onPress }) {
             <Text style={{ fontSize: 10, color: 'red' }}>{errors.title}</Text>
           }
           <Text style={styles.text}>Date</Text>
-          <TextInput
-            value={values.date}
-            onChangeText={handleChange('date')}
-            placeholder="date"
-            onBlur={() => setFieldTouched('date')}
-            style={styles.input}
-            placeholderTextColor={colors.primary}
-          />
-          {touched.date && errors.date &&
-            <Text style={{ fontSize: 10, color: 'red' }}>{errors.date}</Text>
-          }
+          <DatePicker thisDate={date} onPress={(value) => setDate(value)} />
           <Text style={styles.text}>Describe your memory</Text>
           <TextInput
             value={values.description}
@@ -75,11 +69,12 @@ export default function Form({ initialValues, onPress }) {
           }
           <Icon
             name='check'
-            onPress={handleSubmit}
-            style={ styles.button }
+            onPress={isValid && handleSubmit}
+            style={styles.icon} 
             size={30}
+            backgroundColor={isValid ? colors.green : colors.primary}
           />
-        </React.Fragment>
+        </View>
       )}
     </Formik>
   )
@@ -90,16 +85,15 @@ const styles = StyleSheet.create({
     padding: 12,
     paddingLeft: 20,
     backgroundColor: colors.yellow,
-    width: "100%",
+    width: 280,
     borderRadius: 20,
     marginTop: 10,
     color: colors.primary
   },
-  button: {
+  icon: {
     width: 60,
     height: 60,
     borderRadius: 50,
-    backgroundColor: colors.green,
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'flex-end',

@@ -1,6 +1,7 @@
 const baseURL = "http://localhost:3002/";
 
-export default function usePutData(url, body) {
+const usePostData = async (url, body) => {
+  console.log('post', body);
   const options = {
     method: 'Post',
     body: JSON.stringify(body),
@@ -8,8 +9,11 @@ export default function usePutData(url, body) {
   };
   const targetUrl = baseURL + url;
 
-  fetch(targetUrl, options)
-    .catch((err) => {
-      console.log(err);
-    })
+  let response = await fetch(targetUrl, options)
+  let status = await response.status;
+
+  return status;
+
 };
+
+export default usePostData;

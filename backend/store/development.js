@@ -5,4 +5,10 @@ let myDevelopmentData = [
   { "date": "09.09.2020", "percentile": 27 },
   { "date": "09.10.2020", "percentile": 27 },
   { "date": "09.11.2020", "percentile": 30 }
-]
+];
+
+const getDevelopmentData = () => myDevelopmentData;
+
+module.exports= {
+  getDevelopmentData
+}

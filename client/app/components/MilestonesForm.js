@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, TextInput, Text } from 'react-native';
+import { StyleSheet, TextInput, Text, View } from 'react-native';
 import * as Yup from "yup";
 
 import { Formik } from 'formik';
@@ -12,11 +12,11 @@ import IconPicker from './IconPicker';
 
 export default function Form({ initialValues, onPress }) {
   const [image, setImage] = useState();
-  const [date, setDate] = useState();
+  const [date, setDate] = useState(new Date());
   const [myIcon, setMyIcon] = useState();
   let img = image;
 
-  const handleSubmit = (data) => {
+  const handleSubmit = (data, {resetForm}) => {
     const body = {
       "title": data["title"],
       "icon": myIcon,
@@ -25,6 +25,8 @@ export default function Form({ initialValues, onPress }) {
       "image": { url: img }
     }
     onPress(body);
+    setDate(new Date());
+    resetForm();
   };
 
   const validationSchema = Yup.object().shape({
@@ -38,8 +40,8 @@ export default function Form({ initialValues, onPress }) {
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
     >
-      {({ values, handleChange, setFieldTouched, touched, errors, handleSubmit }) => (
-        <React.Fragment>
+      {({ values, handleChange, dirty, isValid = false, setFieldTouched, touched, errors, handleSubmit }) => (
+        <View>
         <ImageInput value={values.image} onPress={value => setImage(value)} />
         <Text style={ styles.text }>Title</Text>
           <TextInput
@@ -54,7 +56,7 @@ export default function Form({ initialValues, onPress }) {
             <Text style={{ fontSize: 10, color: 'red' }}>{errors.title}</Text>
           }
           <Text style={styles.text}>Date</Text>
-          <DatePicker onPress={(value) => setDate(value)}/>
+          <DatePicker thisDate={date} onPress={(value) => setDate(value)}/>
           <Text style={styles.text}>Describe your memory</Text>
           <TextInput
             value={values.description}
@@ -67,30 +69,35 @@ export default function Form({ initialValues, onPress }) {
           {touched.description && errors.description &&
             <Text style={{ fontSize: 10, color: 'red' }}>{errors.description}</Text>
           }
-          <IconPicker onPress={icon => setMyIcon(icon)} />
+          <IconPicker onPress={icon => setMyIcon(icon)} style={ styles.button } />
           <Icon
             name='check'
-            onPress={handleSubmit}
-            style={ styles.button }
+            onPress={isValid && handleSubmit}
+            style={styles.icon}
             size={30}
+            backgroundColor={isValid ? colors.green : colors.primary}
           />
-        </React.Fragment>
+        </View>
       )}
     </Formik>
   )
 }
 
 const styles = StyleSheet.create({
+  button: {
+    marginTop: 30,
+    width: "50%"
+  },
   input: {
     padding: 12,
     paddingLeft: 20,
     backgroundColor: colors.yellow,
-    width: "100%",
+    width: 280,
     borderRadius: 20,
     marginTop: 10,
     color: colors.primary
   },
-  button: {
+  icon: {
     width: 60,
     height: 60,
     borderRadius: 50,

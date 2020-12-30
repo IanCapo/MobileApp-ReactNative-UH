@@ -1,54 +1,48 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 
 import usePostData from '../hooks/usePostData';
 import Screen from '../components/Screen';
 import CategoryPickerItem from '../components/CategoryPickerItem';
-import usePutData from '../hooks/usePutData';
 
-import ProfileForm from '../components/ProfileForm';
+import DevelopmentForm from '../components/DevelopmentForm';
 import MemoriesForm from '../components/MemoriesForm';
 import MilestonesForm from '../components/MilestonesForm';
 
-export default function AddScreen(props) {
-  const [category, setCategory] = useState('profile');
+export default function AddScreen({onPress}) {
+  const [category, setCategory] = useState('milestones');
 
-  const handleSubmit = (body) => {
-    if (category === "profile") {
-      usePutData(`${category}`, body);
-    } else {
-       usePostData(`${category}`,
+  const handleSubmit = async (body) => {
+      const result = await usePostData(`${category}`,
         body
-      );
-    }
+      )
+      if(result === 201){
+        onPress()
+      } else {
+        console.log("error");
+      }
+   
   }
 
   const items = [
-    { name: "account-badge-horizontal-outline", value: "profile", isActive: category === "profile"},
     { name: "heart-multiple-outline", value: "milestones", isActive: category === "milestones" },
     { name: "chart-line", value: "development", isActive: category === "development" },
     { name: "airballoon", value: "memories", isActive: category === "memories" }
   ]
 
   const initialValues = {
-    profile: { "name": "", "dob": "", "weight": "", "height": "", "headcircumference":"" },
     memories: { "title": "", "description": "" },
-    milestones: { "title": "", "icon": ""  }
+    milestones: { "title": "", "icon": ""  },
+    development: { "weight": "", "height": "", "headcurcumference": ""}
   }
 
   return (
   <Screen style={ styles.container }>
-    <View style={ styles.categoryPicker }> 
+     <View style={ styles.categoryPicker }> 
           {items.map(item => (
             <CategoryPickerItem key={item.name} name={item.name} value={item.value} isActive={item.isActive} onPress={(value) => setCategory(value)} />
           ))}
-    </View>
-    { category === "profile" && 
-        <ProfileForm
-          initialValues={initialValues.profile}
-          onPress={body => handleSubmit(body)}
-        />
-  }
+    </View> 
       { category === "memories" &&
         <MemoriesForm
           initialValues={initialValues.memories}
@@ -57,6 +51,12 @@ export default function AddScreen(props) {
       }
       { category === "milestones" &&
         <MilestonesForm
+          initialValues={initialValues.memories}
+          onPress={body => handleSubmit(body)}
+        />
+      }
+      { category === "development" &&
+        <DevelopmentForm
           initialValues={initialValues.memories}
           onPress={body => handleSubmit(body)}
         />

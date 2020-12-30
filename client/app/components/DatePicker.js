@@ -5,8 +5,8 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import Icon from './Icon';
 import colors from '../utilities/colors';
 
-export default function DatePicker({ onPress }) {
-  const [date, setDate] = useState(new Date());
+export default function DatePicker({ onPress, thisDate }) {
+  const [date, setDate] = useState(thisDate);
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
 

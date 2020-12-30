@@ -1,6 +1,7 @@
 const memories = require('../store/memories');
 const milestones = require('../store/milestones');
 const myProfile = require('../store/profile');
+const development = require('../store/development');
 
 const router = app => {
   // memories
@@ -46,7 +47,7 @@ const router = app => {
 
   app.post('/milestones', (req, res) => {
     milestones.addMilestone(req.body)
-    res.status(201).send(`Added milestone with id ${req.body.id}`)
+    res.status(201).send(`Added milestone`)
   });
 
   app.put('/milestones/:id', (req, res) => {
@@ -70,6 +71,11 @@ const router = app => {
     }
     res.send(profile);
   });
+
+  // development
+  app.get('/development', (req, res) => {
+    res.send(development.getDevelopmentData())
+  })
 };
 
 module.exports = router;

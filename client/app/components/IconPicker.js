@@ -10,7 +10,7 @@ import {
 import colors from "../utilities/colors";
 import Icon from "./Icon";
 
-function IconPicker ({ onPress }) {
+function IconPicker ({ onPress, style }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [myIcon, setMyIcon] = useState("foot-print");
 
@@ -32,7 +32,7 @@ function IconPicker ({ onPress }) {
     }
 
   return (
-    <View style={styles.centeredView}>
+    <View style={[styles.centeredView], style}>
       <Modal
         animationType="slide"
         transparent={true}
