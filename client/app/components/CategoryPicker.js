@@ -13,10 +13,6 @@ export default function CategoryPicker(onPress) {
     { name: "airballoon", value: "memories", isActive: category === "memories" }
   ]
 
-  const handleThis = (value) => {
-    setCategory(value);
-  }
-
   return (
   <View style={ styles.container } >
   {items.map(item => (
@@ -29,7 +25,6 @@ export default function CategoryPicker(onPress) {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    padding: 30
+    flexDirection: 'row'
   }
 });

@@ -1,19 +1,10 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-
-import colors from '../utilities/colors'
+import { View } from 'react-native';
 
 export default function VerticalLine({style}) {
   return (
-  <View style={ [styles.container], style }>
+  <View style={ style }>
 
     </View>
   );
 };
-
-
-const styles = StyleSheet.create({
-  container: {
-   
-  }
-});

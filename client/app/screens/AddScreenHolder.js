@@ -8,14 +8,17 @@ import AddScreen from './AddScreen';
 export default function AddScreenHolder({navigation}) {
   const [uploaded, setUploaded] = useState(false);
 
-
+  const goToDashboard = () => {
+    navigation.navigate('Dashboard');
+    setUploaded(false);
+  }
   return (
     <React.Fragment>
       {!uploaded && <AddScreen onPress={() => setUploaded(true)} />}
       {uploaded &&
         <View style={styles.container}>
          <Button title="Add new entry" onPress={() => setUploaded(false)}/>
-         <Button title="Go to dashboard" onPress={() => navigation.navigate('Dashboard')}/>
+         <Button title="Go to dashboard" onPress={() => goToDashboard() }/>
       </View>
     }
     </React.Fragment>

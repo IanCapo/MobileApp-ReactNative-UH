@@ -15,9 +15,8 @@ export default function Form({ initialValues, onPress }) {
     let body = [];
       let date = todayDate;
       let weight = { key: "weight", value: data["weight"] };
-      let height = { key: "height", value: data["height"] };
-      let head = { key: "headcircumference", value: data["headcircumference"] };
-      body.push(date, weight, height, head)
+      let length = { key: "length", value: data["length"] };
+      body.push(date, weight, length)
 
       onPress(body);
       setDate(new Date());
@@ -26,8 +25,7 @@ export default function Form({ initialValues, onPress }) {
 
   const validationSchema = Yup.object().shape({
     weight: Yup.string().required().label("Weight"),
-    height: Yup.string().required().label("Height"),
-    headcircumference: Yup.string().required().label("Head circumference")
+    length: Yup.string().required().label("Length")
   });
 
   return (
@@ -52,29 +50,17 @@ export default function Form({ initialValues, onPress }) {
           {touched.weight && errors.weight &&
             <Text style={{ fontSize: 10, color: 'red' }}>{errors.weight}</Text>
           }
-          <Text style={styles.text}>Height in cm</Text>
+          <Text style={styles.text}>Length in cm</Text>
           <TextInput
-            value={values.height}
-            onChangeText={handleChange('height')}
-            placeholder="Height"
-            onBlur={() => setFieldTouched('height')}
+            value={values.length}
+            onChangeText={handleChange('length')}
+            placeholder="Length"
+            onBlur={() => setFieldTouched('length')}
             style={styles.input}
             placeholderTextColor={colors.primary}
           />
-          {touched.height && errors.height &&
-            <Text style={{ fontSize: 10, color: 'red' }}>{errors.height}</Text>
-          }
-          <Text style={styles.text}>Head circumference in cm</Text>
-          <TextInput
-            value={values.headcircumference}
-            onChangeText={handleChange('headcircumference')}
-            placeholder="Headcircumference"
-            onBlur={() => setFieldTouched('headcircumference')}
-            style={styles.input}
-            placeholderTextColor={colors.primary}
-          />
-          {touched.headcircumference && errors.headcircumference &&
-            <Text style={{ fontSize: 10, color: 'red' }}>{errors.headcircumference}</Text>
+          {touched.length && errors.length &&
+            <Text style={{ fontSize: 10, color: 'red' }}>{errors.length}</Text>
           }
           <Icon
             name='check'
