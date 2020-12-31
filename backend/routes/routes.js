@@ -75,6 +75,10 @@ const router = app => {
   // development
   app.get('/development', (req, res) => {
     res.send(development.getDevelopmentData())
+  });
+
+  app.post('/development', (req, res) => {
+    development.addDevelpmentData(req.body)
   })
 };
 

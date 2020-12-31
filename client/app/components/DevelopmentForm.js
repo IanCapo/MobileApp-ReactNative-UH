@@ -13,10 +13,11 @@ export default function Form({ initialValues, onPress }) {
 
   const handleSubmit = (data, {resetForm}) => {
     let body = [];
-      let date = todayDate;
-      let weight = { key: "weight", value: data["weight"] };
-      let length = { key: "length", value: data["length"] };
-      body.push(date, weight, length)
+      let date = todayDate; 
+      let length = { value: data["length"] };
+      let sex = { value: 1 }
+      let weight = { value: data["weight"] };
+      body.push(date, length, weight, sex)
 
       onPress(body);
       setDate(new Date());
