@@ -1,11 +1,11 @@
 let profile = {
   "name": "baby",
-  "dob": "09.06.2020",
-  "weight": 2640,
-  "length": 46.5,
+  "dob": new Date(),
+  "weight": 3350,
+  "length": 52,
   "sex": "boy",
   "image": {
-    "url": "/Users/fabian/Documents/University of Hertfordshire/Mobile Computing/A_2/client/app/assets/_R9A9401.jpg"
+    "url": "/Users/fabian/Documents/University of Hertfordshire/Mobile Computing/A_2/client/app/assets/baby.jpg"
   }
 };
 
