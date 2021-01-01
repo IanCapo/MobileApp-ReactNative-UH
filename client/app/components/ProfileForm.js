@@ -31,7 +31,7 @@ export default function Form({navigation}) {
 
       const result = await usePostData("profile",
         body
-      )
+      );
       
       if (result === 201) {
         navigation.navigate('Dashboard')
@@ -54,8 +54,6 @@ export default function Form({navigation}) {
     length: Yup.number().required().label("length")
   });
 
-
-
   return (
     <Formik
       initialValues={initialValues}
@@ -63,7 +61,6 @@ export default function Form({navigation}) {
       validationSchema={validationSchema}
     >
       {({ values, handleChange, setFieldTouched, touched, errors, handleSubmit }) => (
-        
         <Screen style={ styles.container }>
         <Text style={ styles.headline }>Update your childs profile</Text>
         <ImageInput value={values.image} onPress={value => setImage(value)} />
@@ -118,9 +115,24 @@ export default function Form({navigation}) {
 }
 
 const styles = StyleSheet.create({
+  button: {
+    width: 60,
+    height: 60,
+    borderRadius: 50,
+    backgroundColor: colors.green,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'flex-end',
+    marginTop: 20
+  },
   container: {
     padding: 30
   }, 
+  headline: {
+    fontSize: 20,
+    alignSelf: 'center',
+    marginBottom: 20
+  },
   image: {
     marginBottom: 20
   },
@@ -132,21 +144,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginTop: 10,
     color: colors.primary
-  },
-  button: {
-    width: 60,
-    height: 60,
-    borderRadius: 50,
-    backgroundColor: colors.green,
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'flex-end',
-    marginTop: 20
-  },
-  headline: {
-    fontSize: 20,
-    alignSelf: 'center',
-    marginBottom: 20
   },
   switch: {
     alignSelf: 'flex-start'
