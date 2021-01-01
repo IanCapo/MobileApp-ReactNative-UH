@@ -7,8 +7,10 @@ import colors from '../utilities/colors';
 export default function Icon({ backgroundColor, name, size, color, style, onPress }) {
   if(onPress) {
     return (
-      <TouchableOpacity style={style ? style : styles.container} backgroundColor={backgroundColor ? backgroundColor : colors.primary} onPress={onPress} >
+      <TouchableOpacity  onPress={onPress} >
+        <View style={style ? style : styles.container} backgroundColor={backgroundColor ? backgroundColor : colors.primary}>
         <MaterialCommunityIcons name={name} size={size} color={color} />
+        </View>
       </TouchableOpacity>
     )
     } else {

@@ -3,7 +3,6 @@ import { StyleSheet, Text } from 'react-native';
 
 import Screen from "../components/Screen";
 import ProgressItem from "../components/ProgressItem";
-import initialState from '../../initialState';
 import useApi from '../hooks/useApi'
 
 
@@ -17,7 +16,7 @@ export default function MilesStones({ navigation }) {
     {data && data.map((item, index) => (
         <ProgressItem 
           onPress={() => navigation.navigate('MilestoneDetail', { otherParam: item })} 
-          lastItem={index === initialState.milestones.length - 1}
+          lastItem={index === data.length - 1}
           text={item.title}
           icon={item.icon}
           date={item.date}

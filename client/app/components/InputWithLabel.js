@@ -5,7 +5,7 @@ import colors from '../utilities/colors';
 import TextInput from './TextInput';
 import EditButton from './EditButton';
 
-export default function InputWithLabel({ icon, placeholder, isEditable, unit, withEditOption = true  }) {
+export default function InputWithLabel({ icon, placeholder, isEditable, unit, withEditOption = false  }) {
   const [editable, setEditable] = useState(isEditable);
   
   return (

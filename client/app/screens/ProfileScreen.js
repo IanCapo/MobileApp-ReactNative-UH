@@ -13,7 +13,7 @@ import colors from '../utilities/colors';
 
 export default function ProfileScreen() {
   const { data, loading, error } = useApi("profile");
-  const [editable, setEditable] = useState(false)
+  const [editable, setEditable] = useState(false);
 
   const renderImage = () => {
     if(editable) {
@@ -46,45 +46,29 @@ export default function ProfileScreen() {
             icon="baby-bottle-outline" 
             placeholder={data.name} 
             type="text" 
-            isEditable={editable} 
-            withEditOption={editable} />
+          />
           <InputWithLabel 
             icon="calendar" 
             placeholder={data.dob} 
             type="text" 
-            isEditable={editable} 
-            withEditOption={editable} />
+          />
           <InputWithLabel 
             icon="scale" 
             placeholder={data.weight.toString()} 
             type="number" 
             unit="g" 
-            isEditable={editable} 
-            withEditOption={editable} />
+           />
           <InputWithLabel 
             icon="human-male-height" 
-            placeholder={data.height.toString()} 
+            placeholder={data.length.toString()} 
             type="number" 
             unit="cm" 
-            isEditable={editable} 
-            withEditOption={editable} />
+         />
           <InputWithLabel 
             icon="face" 
-            placeholder={data.head.toString()} 
-            type="number" 
-            unit="cm" 
-            isEditable={editable} 
-            withEditOption={editable} />
-            {editable && <Icon 
-              name="check" 
-              size={30} 
-              style={styles.iconCheck} 
-              onPress={() => console.log('saved pressed')} />}
-            {!editable && <Icon 
-              name="border-color" 
-              size={30} 
-              style={styles.iconEdit} 
-              onPress={() => setEditable(true)} /> }
+            placeholder={data.sex} 
+            type="text" 
+             />
       </Screen>
     ); 
   } else if (loading) {

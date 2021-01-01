@@ -1,6 +1,7 @@
 const memories = require('../store/memories');
 const milestones = require('../store/milestones');
 const myProfile = require('../store/profile');
+const development = require('../store/development');
 
 const router = app => {
   // memories
@@ -19,7 +20,7 @@ const router = app => {
 
  app.post('/memories', (req, res) => {
    memories.addMemory(req.body)
-   res.status(201).send(`Added memory with id ${req.body.id}`)
+   res.status(201).send('Added memory')
  });
 
   app.put('/memories/:id', (req, res) => {
@@ -29,7 +30,6 @@ const router = app => {
     memories.updateMemory(memory, req.body.key, req.body.value)
     res.send(memory);
   });
-
 
 // milestones
   app.get('/milestones', (req, res) => {
@@ -47,7 +47,7 @@ const router = app => {
 
   app.post('/milestones', (req, res) => {
     milestones.addMilestone(req.body)
-    res.status(201).send(`Added milestone with id ${req.body.id}`)
+    res.status(201).send(`Added milestone`)
   });
 
   app.put('/milestones/:id', (req, res) => {
@@ -63,14 +63,23 @@ const router = app => {
     res.send(myProfile.getProfile())
   });
 
-  app.put('/profile', (req, res) => {
+  app.post('/profile', (req, res) => {
     const profile = myProfile.getProfile();
     const data = req.body;
     for(let i = 0; i < data.length; i++) {
       myProfile.updateProfile(profile, data[i].key, data[i].value)
     }
-    res.send(profile);
+    res.status(201).send(profile);
   });
+
+  // development
+  app.get('/development', (req, res) => {
+    res.send(development.getDevelopmentData())
+  });
+
+  app.post('/development', (req, res) => {
+    development.addDevelpmentData(req.body)
+  })
 };
 
 module.exports = router;

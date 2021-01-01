@@ -12,7 +12,7 @@ export default function usePutData(url, body) {
 
   fetch(targetUrl, options)
     .then(res => {
-      res.json();
+       res.json();
     }),
     (err) => {
       console.log(err);

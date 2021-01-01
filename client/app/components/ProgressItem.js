@@ -11,7 +11,7 @@ export default function ProgressItem({ onPress, lastItem = true, text, icon, dat
     <TouchableOpacity onPress={ onPress }>
       <View style={styles.container} > 
         <Icon name={ date ? icon : "foot-print" } size={50} style={styles.icon } backgroundColor={date ? colors.green : colors.secondary } />
-        <Text>{text} { date }</Text>
+        <Text>{text}</Text>
         {!lastItem && <VerticalLine style={ styles.line } /> }
       </View>
     </TouchableOpacity>

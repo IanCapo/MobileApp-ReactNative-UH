@@ -4,8 +4,9 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import colors from '../utilities/colors';
 import Dashboard from '../screens/Dashboard';
-import AddScreen from '../screens/AddScreen';
+import AddScreenHolder from '../screens/AddScreenHolder';
 import Settings from '../screens/Settings';
+import ProfileForm from '../components/ProfileForm';
 import AddButton from "./AddButton";
 import DashboardStack from './DashboardStack';
 
@@ -28,7 +29,7 @@ export default function Navigator() {
       />
       <Tab.Screen
         name="Add"
-        component={AddScreen}
+        component={AddScreenHolder}
         options={({ navigation }) => ({
           tabBarButton: () =>
             <AddButton onPress={() => navigation.navigate('Add')} />,
@@ -41,9 +42,9 @@ export default function Navigator() {
           )
         })}
       />
-      <Tab.Screen name="settings" component={Settings} options={{
+      <Tab.Screen name="Account" component={ProfileForm} options={{
         tabBarIcon: () =>
-          <MaterialCommunityIcons name="settings" size={30} color={colors.primary} />
+          <MaterialCommunityIcons name="account" size={30} color={colors.primary} />
       }}
       />
     </Tab.Navigator>

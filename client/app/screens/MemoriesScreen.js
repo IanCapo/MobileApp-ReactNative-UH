@@ -6,10 +6,8 @@ import useApi from '../hooks/useApi';
 
 
 export default function MemoriesScreen({navigation}) {
-
  const { data, loading, error } = useApi("memories");
  
-
   return (
   <Screen style={ styles.container }>
       {loading && <Text>Please wait while we're fetching your data</Text>}
