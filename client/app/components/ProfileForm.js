@@ -6,31 +6,52 @@ import { Formik } from 'formik';
 import colors from '../utilities/colors';
 import Icon from './Icon';
 import ImageInput from '../components/ImageInput';
+import DatePicker from './DatePicker';
+import Screen from './Screen';
+import SwitchComponent from './Switch';
+import usePostData from '../hooks/usePostData';
 
 
-export default function Form({ initialValues, onPress }) {
+export default function Form({navigation}) {
   const [image, setImage] = useState();
+  const [todayDate, setDate] = useState(new Date());
+  const [sex, setSex] = useState('girl');
   let img = image;
+  let sx = sex;
 
-  const handleSubmit = (data) => {
+  const handleSubmit = async (data) => {
     let body = [];
       let name = { key: "name", value: data["name"] };
-      let dob = { key: "dob", value: data["dob"] };
+      let dob = { key: "dob", value: todayDate };
       let weight = { key: "weight", value: data["weight"] };
-      let height = { key: "height", value: data["height"] };
-      let head = { key: "headcircumference", value: data["headcircumference"] };
+      let length = { key: "length", value: data["length"] };
+      let sex = {"key": "sex", "value": sx};
       let image = { key: "image", value: img}
-      body.push(name, dob, weight, height, head, image)
+      body.push(name, dob, weight, length, image, sex);
 
-      onPress(body);
+      const result = await usePostData("profile",
+        body
+      )
+      
+      if (result === 201) {
+        navigation.navigate('Dashboard')
+      } else {
+        console.log("error");
+      }
   };
+
+  const initialValues = {
+    "name": "",
+     "dob": "",
+     "sex": "",
+     "weight": "",
+     "length": ""
+  }
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required().min(1).label("Name"),
-    dob: Yup.string().required().label("Date of Birth"),
-    weight: Yup.string().required().label("Weight"),
-    height: Yup.string().required().label("Height"),
-    headcircumference: Yup.string().required().label("Head circumference")
+    weight: Yup.number().required().label("Weight"),
+    length: Yup.number().required().label("length")
   });
 
 
@@ -42,8 +63,10 @@ export default function Form({ initialValues, onPress }) {
       validationSchema={validationSchema}
     >
       {({ values, handleChange, setFieldTouched, touched, errors, handleSubmit }) => (
-        <React.Fragment>
-        <ImageInput value={values.image} onPress={value => setImage(value)}/>
+        
+        <Screen style={ styles.container }>
+        <Text style={ styles.headline }>Update your childs profile</Text>
+        <ImageInput value={values.image} onPress={value => setImage(value)} />
         <Text style={ styles.text }>Name of your child</Text>
           <TextInput
             value={values.name}
@@ -56,18 +79,8 @@ export default function Form({ initialValues, onPress }) {
           {touched.name && errors.name &&
             <Text style={{ fontSize: 10, color: 'red' }}>{errors.name}</Text>
           }
-          <Text style={styles.text}>Date if birth DD.MM.YYYY</Text>
-          <TextInput
-            value={values.dob}
-            onChangeText={handleChange('dob')}
-            placeholder="DoB"
-            onBlur={() => setFieldTouched('dob')}
-            style={styles.input}
-            placeholderTextColor={colors.primary}
-          />
-          {touched.dob && errors.dob &&
-            <Text style={{ fontSize: 10, color: 'red' }}>{errors.dob}</Text>
-          }
+          <DatePicker thisDate={todayDate} onPress={(value) => setDate(value)} />
+          <SwitchComponent onPress={value => setSex(value)} />
           <Text style={styles.text}>Weight in g</Text>
           <TextInput
             value={values.weight}
@@ -80,29 +93,17 @@ export default function Form({ initialValues, onPress }) {
           {touched.weight && errors.weight &&
             <Text style={{ fontSize: 10, color: 'red' }}>{errors.weight}</Text>
           }
-          <Text style={styles.text}>Height in cm</Text>
+          <Text style={styles.text}>Length in cm</Text>
           <TextInput
-            value={values.height}
-            onChangeText={handleChange('height')}
-            placeholder="Height"
-            onBlur={() => setFieldTouched('height')}
+            value={values.length}
+            onChangeText={handleChange('length')}
+            placeholder="length"
+            onBlur={() => setFieldTouched('length')}
             style={styles.input}
             placeholderTextColor={colors.primary}
           />
-          {touched.height && errors.height &&
-            <Text style={{ fontSize: 10, color: 'red' }}>{errors.height}</Text>
-          }
-          <Text style={styles.text}>Head circumference in cm</Text>
-          <TextInput
-            value={values.headcircumference}
-            onChangeText={handleChange('headcircumference')}
-            placeholder="Headcircumference"
-            onBlur={() => setFieldTouched('headcircumference')}
-            style={styles.input}
-            placeholderTextColor={colors.primary}
-          />
-          {touched.headcircumference && errors.headcircumference &&
-            <Text style={{ fontSize: 10, color: 'red' }}>{errors.headcircumference}</Text>
+          {touched.length && errors.length &&
+            <Text style={{ fontSize: 10, color: 'red' }}>{errors.length}</Text>
           }
           <Icon
             name='check'
@@ -110,13 +111,19 @@ export default function Form({ initialValues, onPress }) {
             style={ styles.button }
             size={30}
           />
-        </React.Fragment>
+        </Screen>
       )}
     </Formik>
   )
 }
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 30
+  }, 
+  image: {
+    marginBottom: 20
+  },
   input: {
     padding: 12,
     paddingLeft: 20,
@@ -136,9 +143,17 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     marginTop: 20
   },
+  headline: {
+    fontSize: 20,
+    alignSelf: 'center',
+    marginBottom: 20
+  },
+  switch: {
+    alignSelf: 'flex-start'
+  },
   text: {
     left: 10,
-    marginTop: 10,
+    marginTop: 15,
     alignSelf: 'flex-start'
   }
 })

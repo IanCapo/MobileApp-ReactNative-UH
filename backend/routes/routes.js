@@ -63,13 +63,13 @@ const router = app => {
     res.send(myProfile.getProfile())
   });
 
-  app.put('/profile', (req, res) => {
+  app.post('/profile', (req, res) => {
     const profile = myProfile.getProfile();
     const data = req.body;
     for(let i = 0; i < data.length; i++) {
       myProfile.updateProfile(profile, data[i].key, data[i].value)
     }
-    res.send(profile);
+    res.status(201).send(profile);
   });
 
   // development

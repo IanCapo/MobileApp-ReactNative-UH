@@ -1,7 +1,6 @@
 const baseURL = "http://localhost:3002/";
 
 const usePostData = async (url, body) => {
-  console.log('post', body);
   const options = {
     method: 'Post',
     body: JSON.stringify(body),

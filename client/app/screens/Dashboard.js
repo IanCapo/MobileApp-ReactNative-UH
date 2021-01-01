@@ -14,7 +14,7 @@ export default function Dashboard() {
 
   <Screen style={ styles.container }>
       <View style={ styles.row }>
-      <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+      <TouchableOpacity onPress={() => navigation.navigate('Profile', { otherParam: null })}>
           <Icon name="account-badge-horizontal-outline" size={50} color="white" backgroundColor={colors.secondary} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('MileStones')}>
