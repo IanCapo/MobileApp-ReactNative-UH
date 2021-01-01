@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, TextInput, Text } from 'react-native';
 import * as Yup from "yup";
 import { Formik } from 'formik';
@@ -10,9 +10,11 @@ import DatePicker from './DatePicker';
 import Screen from './Screen';
 import SwitchComponent from './Switch';
 import usePostData from '../hooks/usePostData';
+import useApi from "../hooks/useApi";
 
 
 export default function Form({navigation}) {
+  const { data, loading, error } = useApi("profile");
   const [image, setImage] = useState();
   const [todayDate, setDate] = useState(new Date());
   const [sex, setSex] = useState('girl');
@@ -41,7 +43,7 @@ export default function Form({navigation}) {
   };
 
   const initialValues = {
-    "name": "",
+     "name": "",
      "dob": "",
      "sex": "",
      "weight": "",
@@ -63,7 +65,7 @@ export default function Form({navigation}) {
       {({ values, handleChange, setFieldTouched, touched, errors, handleSubmit }) => (
         <Screen style={ styles.container }>
         <Text style={ styles.headline }>Update your childs profile</Text>
-        <ImageInput value={values.image} onPress={value => setImage(value)} />
+        {data && <ImageInput value={values.image} existingImage={data.image.url} onPress={img => setImage(img)} />}
         <Text style={ styles.text }>Name of your child</Text>
           <TextInput
             value={values.name}

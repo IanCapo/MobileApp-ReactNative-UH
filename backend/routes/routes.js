@@ -73,7 +73,9 @@ const router = app => {
         "id": 1,
         "date": req.body[1].value,
         "description": "Today I was born",
-        "url": req.body[4].value,
+        "image": {
+           "url": req.body[4].value,
+        }, 
         "icon": "baby-carriage"
         }
 

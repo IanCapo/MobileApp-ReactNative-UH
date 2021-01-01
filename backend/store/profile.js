@@ -12,8 +12,8 @@ let profile = {
 const getProfile = () => profile;
 
 const updateProfile = (profile, key, value) => {
-  if(key === "image") {
-    profile[key]["url"] = value;
+  if (key === "image") {
+    if (value) profile["image"]["url"] = value 
   } else {
     profile[key] = value;
   }

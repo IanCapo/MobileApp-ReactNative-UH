@@ -8,7 +8,6 @@ import ImageWithIcon from './ImageWithIcon';
 
 export default function ImageInput({type, existingImage, onPress }) {
   const [image, setImage] = existingImage ? useState(existingImage.url) : useState(null);
-  
   useEffect(() => {
     (async () => {
       if (Platform.OS !== 'web') {
