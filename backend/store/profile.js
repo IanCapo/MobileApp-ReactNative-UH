@@ -1,19 +1,19 @@
 let profile = {
   "name": "baby",
-  "dob": "09.06.2020",
-  "weight": 2640,
-  "length": 46.5,
+  "dob": new Date(),
+  "weight": 3350,
+  "length": 52,
   "sex": "boy",
   "image": {
-    "url": "/Users/fabian/Documents/University of Hertfordshire/Mobile Computing/A_2/client/app/assets/_R9A9401.jpg"
+    "url": "/Users/fabian/Documents/University of Hertfordshire/Mobile Computing/A_2/client/app/assets/baby.jpg"
   }
 };
 
 const getProfile = () => profile;
 
 const updateProfile = (profile, key, value) => {
-  if(key === "image") {
-    profile[key]["url"] = value;
+  if (key === "image") {
+    if (value) profile["image"]["url"] = value 
   } else {
     profile[key] = value;
   }

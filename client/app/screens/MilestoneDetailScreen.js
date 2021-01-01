@@ -5,12 +5,14 @@ import Screen from "../components/Screen";
 
 export default function MilestoneDetailScreen({ route }) {
   const { key, otherParam } = route.params;
+  const dateArray = otherParam.date.split('T')[0].split('-');
+  const date = `${dateArray[1]}.${dateArray[2]}.${dateArray[0]}`;
   return (
     <Screen key={key} style={styles.container}>
       <Image source={{uri: otherParam.image.url}} style={styles.image} />
       <View style={styles.detailsContainer}>
         <Text style={styles.title}>{otherParam.title}</Text>
-        <Text style={styles.date}>{otherParam.date}</Text>
+        <Text style={styles.date}>{date}</Text>
         <Text>{otherParam.info}</Text>
       </View>
     </Screen>

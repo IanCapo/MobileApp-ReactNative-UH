@@ -39,6 +39,8 @@ export default function ProfileScreen() {
   }
 
   if (data) {
+    const dateArray = data.dob.split('T')[0].split('-');
+    const date = `${dateArray[1]}.${dateArray[2]}.${dateArray[0]}`
     return (
       <Screen style={ styles.container }>
         { !editable ? renderImage() : renderImage() }
@@ -49,7 +51,7 @@ export default function ProfileScreen() {
           />
           <InputWithLabel 
             icon="calendar" 
-            placeholder={data.dob} 
+            placeholder={date} 
             type="text" 
           />
           <InputWithLabel 

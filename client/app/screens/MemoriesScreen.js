@@ -6,12 +6,13 @@ import useApi from '../hooks/useApi';
 
 
 export default function MemoriesScreen({navigation}) {
- const { data, loading, error } = useApi("memories");
- 
+  const { data, loading, error } = useApi("memories");
+
   return (
   <Screen style={ styles.container }>
       {loading && <Text>Please wait while we're fetching your data</Text>}
       {error && <Text>Sorry, we couldn't fetch your data</Text>}
+      
       {data && data.map((memory) => (
         <TouchableOpacity key={memory.id} onPress={() => navigation.navigate('MemoryDetail', {otherParam: memory})}>
           <Image source={{ uri: memory.image.url }} style={styles.image} />

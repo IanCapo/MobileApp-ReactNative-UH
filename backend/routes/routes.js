@@ -3,6 +3,8 @@ const milestones = require('../store/milestones');
 const myProfile = require('../store/profile');
 const development = require('../store/development');
 
+let firstEntry = true;
+
 const router = app => {
   // memories
   app.get('/memories', (req, res) => {
@@ -19,7 +21,7 @@ const router = app => {
  });
 
  app.post('/memories', (req, res) => {
-   memories.addMemory(req.body)
+   memories.addMemory(req.body);
    res.status(201).send('Added memory')
  });
 
@@ -46,6 +48,7 @@ const router = app => {
   });
 
   app.post('/milestones', (req, res) => {
+    console.log('posted milestone');
     milestones.addMilestone(req.body)
     res.status(201).send(`Added milestone`)
   });
@@ -64,6 +67,22 @@ const router = app => {
   });
 
   app.post('/profile', (req, res) => {
+    if (firstEntry) {
+      const milestone = {
+        "title": "Birth",
+        "id": 1,
+        "date": req.body[1].value,
+        "description": "Today I was born",
+        "image": {
+           "url": req.body[4].value,
+        }, 
+        "icon": "baby-carriage"
+        }
+
+        milestones.addMilestone(milestone);
+        firstEntry = false;
+    }
+    
     const profile = myProfile.getProfile();
     const data = req.body;
     for(let i = 0; i < data.length; i++) {
