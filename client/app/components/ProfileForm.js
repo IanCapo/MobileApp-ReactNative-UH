@@ -14,7 +14,7 @@ import useApi from "../hooks/useApi";
 
 
 export default function Form({navigation}) {
-  const { data, loading, error } = useApi("profile");
+  const { data, loading, error } = useApi.useFetch("profile");
   const [image, setImage] = useState();
   const [todayDate, setDate] = useState(new Date());
   const [sex, setSex] = useState('girl');
