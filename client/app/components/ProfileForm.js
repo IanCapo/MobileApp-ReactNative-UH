@@ -11,15 +11,26 @@ import Screen from './Screen';
 import SwitchComponent from './Switch';
 import usePostData from '../hooks/usePostData';
 import useApi from "../hooks/useApi";
+import cache from '../utilities/cache';
 
 
 export default function Form({navigation}) {
-  const { data, loading, error } = useApi.useFetch("profile");
   const [image, setImage] = useState();
   const [todayDate, setDate] = useState(new Date());
   const [sex, setSex] = useState('girl');
   let img = image;
   let sx = sex;
+
+  const { data } = useApi.useFetch("profile");
+
+  useEffect(() => {
+    const cachedData = async () => {
+      const jsonData = await cache.getData('profile')
+      const data = JSON.parse(jsonData.data)
+      setImage(data.image.url);
+    }
+    cachedData()
+  }, [])
 
   const handleSubmit = async (data) => {
     let body = [];
@@ -65,7 +76,7 @@ export default function Form({navigation}) {
       {({ values, handleChange, setFieldTouched, touched, errors, handleSubmit }) => (
         <Screen style={ styles.container }>
         <Text style={ styles.headline }>Update your childs profile</Text>
-        {data && <ImageInput value={values.image} existingImage={data.image.url} onPress={img => setImage(img)} />}
+        <ImageInput value={values.image} onPress={img => setImage(img)} />
         <Text style={ styles.text }>Name of your child</Text>
           <TextInput
             value={values.name}
