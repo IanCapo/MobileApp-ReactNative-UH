@@ -1,34 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 
 import Screen from "../components/Screen";
 import ProgressItem from "../components/ProgressItem";
-import useApi from '../hooks/useApi';
-import cache from '../utilities/cache';
+import useApi from '../hooks/useApi'
 
 
 export default function MilesStones({ navigation }) {
-  const [isLoading, setIsLoading] = useState(true)
-  const { data } = useApi.useFetch("milestones");
-  const [myData, setMyData] = useState(data);
-
-
-  useEffect(() => {
-    const cachedData = async () => {
-      const data = await cache.getData('milestones')
-      setMyData(JSON.parse(data.data));
-      setIsLoading(false);
-    }
-    cachedData()
-  }, [])
+  const { data, loading, error } = useApi("milestones");
 
   return (
   <Screen style={ styles.container }>
-    {isLoading && <Text>Please wait while we're fetching your data</Text>}
-    {myData && myData.map((item, index) => (
+    {loading && <Text>Please wait while we're fetching your data</Text>}
+    {error && <Text>Sorry, we couldn't fetch your data</Text>}
+    {data && data.map((item, index) => (
         <ProgressItem 
           onPress={() => navigation.navigate('MilestoneDetail', { otherParam: item })} 
-          lastItem={index === myData.length - 1}
+          lastItem={index === data.length - 1}
           text={item.title}
           icon={item.icon}
           date={item.date}

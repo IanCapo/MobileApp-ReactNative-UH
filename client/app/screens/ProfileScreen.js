@@ -1,31 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Image, Text } from 'react-native';
 
 import Screen from '../../app/components/Screen'
 import InputWithLabel from '../components/InputWithLabel';
 import ImageInput from '../../app/components/ImageInput'
+import Icon from '../components/Icon';
 
 import useApi from '../hooks/useApi';
 import usePutData from '../hooks/usePutData';
 import colors from '../utilities/colors';
-import cache from '../utilities/cache';
 
 
 export default function ProfileScreen() {
-  const [isLoading, setIsLoading] = useState(true)
-  const { data } = useApi.useFetch("profile");
-  const [editable, setEditable] = useState(false); 
-  const [myData, setMyData] = useState(data)
+  const { data, loading, error } = useApi("profile");
+  const [editable, setEditable] = useState(false);
 
- useEffect(() => {
-   const cachedData = async () => {
-     const data = await cache.getData('profile')
-     setMyData(JSON.parse(data.data));
-     setIsLoading(false)
-   }
-   cachedData()
- }, [])
-  
   const renderImage = () => {
     if(editable) {
      return (
@@ -39,7 +28,7 @@ export default function ProfileScreen() {
       return (
         <Image
         style={styles.image}
-        source={{ uri: myData.image.url }}
+        source={{ uri: data.image.url }}
       />
       )
     }
@@ -49,15 +38,15 @@ export default function ProfileScreen() {
     usePutData('profile', [{ "key": "image", "value": payload }])
   }
 
-  if ( myData ) {
-    const dateArray = myData.dob.split('T')[0].split('-');
+  if (data) {
+    const dateArray = data.dob.split('T')[0].split('-');
     const date = `${dateArray[1]}.${dateArray[2]}.${dateArray[0]}`
     return (
       <Screen style={ styles.container }>
         { !editable ? renderImage() : renderImage() }
           <InputWithLabel 
             icon="baby-bottle-outline" 
-            placeholder={myData.name} 
+            placeholder={data.name} 
             type="text" 
           />
           <InputWithLabel 
@@ -67,27 +56,32 @@ export default function ProfileScreen() {
           />
           <InputWithLabel 
             icon="scale" 
-            placeholder={myData.weight.toString()} 
+            placeholder={data.weight.toString()} 
             type="number" 
             unit="g" 
            />
           <InputWithLabel 
             icon="human-male-height" 
-            placeholder={myData.length.toString()} 
+            placeholder={data.length.toString()} 
             type="number" 
             unit="cm" 
          />
           <InputWithLabel 
             icon="face" 
-            placeholder={myData.sex} 
+            placeholder={data.sex} 
             type="text" 
              />
       </Screen>
     ); 
-  } else if ( isLoading ) {
+  } else if (loading) {
     return (
-      <Screen style={ styles.container }>
+      <Screen>
         <Text>Loading</Text>
+      </Screen>)
+  } else if (error) {
+    return (
+      <Screen>
+        <Text>Error</Text>
       </Screen>)
   }
 };
