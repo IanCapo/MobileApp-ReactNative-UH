@@ -12,7 +12,7 @@ const convertToInches = (cm) => {
   return cm * 0.39370079
 }
 
-const addDevelpmentData = (data) => {
+const addDevelopmentData = (data) => {
   const sex = data[3].value;
   const weight = convertToPounds(data[2].value);
   const length = convertToInches(data[1].value);
@@ -52,5 +52,5 @@ const pushData = (newEntry) => {
 
 module.exports= {
   getDevelopmentData,
-  addDevelpmentData
+  addDevelopmentData
 }

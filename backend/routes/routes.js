@@ -97,7 +97,7 @@ const router = app => {
   });
 
   app.post('/development', (req, res) => {
-    development.addDevelpmentData(req.body)
+    development.addDevelopmentData(req.body)
   })
 };
 
