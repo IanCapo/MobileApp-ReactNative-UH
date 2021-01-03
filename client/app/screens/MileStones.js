@@ -12,7 +12,6 @@ export default function MilesStones({ navigation }) {
   const { data } = useApi.useFetch("milestones");
   const [myData, setMyData] = useState(data);
 
-
   useEffect(() => {
     const cachedData = async () => {
       const data = await cache.getData('milestones')
@@ -25,7 +24,14 @@ export default function MilesStones({ navigation }) {
   return (
   <Screen style={ styles.container }>
     {isLoading && <Text>Please wait while we're fetching your data</Text>}
-    {myData && myData.map((item, index) => (
+    {myData && myData.sort((a,b) => { 
+      const itemA = new Date (a.date).getTime()
+      const itemB = new Date(b.date).getTime()
+      const item = itemA - itemB;
+      return item
+     }
+     ).map((item, index) => {
+      return (
         <ProgressItem 
           onPress={() => navigation.navigate('MilestoneDetail', { otherParam: item })} 
           lastItem={index === myData.length - 1}
@@ -35,6 +41,7 @@ export default function MilesStones({ navigation }) {
           key={item.id}
           />
         )
+      }
       ) 
     }
     </Screen>

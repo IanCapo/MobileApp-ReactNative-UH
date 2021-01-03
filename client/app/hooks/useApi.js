@@ -18,6 +18,7 @@ const baseURL = "http://localhost:3002/";
        setError(res);
      })
      .then(data => {
+       if(data.length === 0 || data.name === 'baby' ) return
        cache.storeData(url, data);
        setData(data);
      })
