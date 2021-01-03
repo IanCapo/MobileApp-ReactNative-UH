@@ -7,6 +7,7 @@ const baseURL = "http://localhost:3002/";
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [first, setFirst] = useState(true)
 
   useEffect(() => {
     fetch(baseURL + url)
@@ -18,9 +19,10 @@ const baseURL = "http://localhost:3002/";
        setError(res);
      })
      .then(data => {
-       if(data.length === 0 || data.name === 'baby' ) return
+       if((!first && data.length === 0) || data.name === 'baby' ) return
        cache.storeData(url, data);
        setData(data);
+       setFirst(false)
      })
      .catch(err => {
        const data = cache.getData(url);
