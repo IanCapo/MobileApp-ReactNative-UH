@@ -19,7 +19,20 @@ const getData = async (key) => {
   }
 }
 
+removeFew = async () => {
+  const keys = ['profile', 'development', 'milestones', 'memories']
+  try {
+    await AsyncStorage.multiRemove(keys)
+  } catch (e) {
+    // remove error
+  }
+
+  console.log('Done')
+}
+
+
 export default {
   getData,
-  storeData
+  storeData,
+  removeFew
 }
