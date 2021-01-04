@@ -67,7 +67,7 @@ const router = app => {
   });
 
   app.post('/profile', (req, res) => {
-    if (firstEntry) {
+    if (milestones.getMilestones().length === 0) {
       const milestone = {
         "title": "Birth",
         "id": 1,
@@ -81,6 +81,16 @@ const router = app => {
 
         milestones.addMilestone(milestone);
         firstEntry = false;
+    }
+    if(development.getDevelopmentData().length === 0) {
+      const devDataSet = [
+        { "key": "date", "value": req.body[1].value },
+        { "key": "length", "value": req.body[3].value },
+        { "key": "weight", "value": req.body[2].value },
+        { "key": "sex", "value": req.body[5].value },
+         new Date()
+      ]
+      development.addDevelopmentData(devDataSet);
     }
     
     const profile = myProfile.getProfile();
@@ -97,7 +107,10 @@ const router = app => {
   });
 
   app.post('/development', (req, res) => {
-    development.addDevelpmentData(req.body)
+    const dob = myProfile.getProfile().dob
+    const data = req.body;
+    data.push(dob)
+    development.addDevelopmentData(data)
   })
 };
 

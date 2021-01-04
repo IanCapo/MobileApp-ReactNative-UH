@@ -31,7 +31,7 @@ export default function ProfileScreen() {
      return (
        <ImageInput
         style={styles.image}
-        existingImage={data.image.url}
+        existingImage={myData.image.url}
         onPress={(payload) => changeImageAppearance(payload)}
       />
       )

@@ -48,12 +48,20 @@
     }
   ],
   "developmentData": [
-    {"date": "09.06.2020", "percentile": 10},
-    {"date": "09.07.2020", "percentile": 20},
-    {"date": "09.08.2020", "percentile": 25},
-    {"date": "09.09.2020", "percentile": 27},
-    {"date": "09.10.2020", "percentile": 27},
-    {"date": "09.11.2020", "percentile": 30}
+    {
+      "date": "2021-01-03T11:06:04.870Z",
+      "percWeight": "0.87",
+      "percLenght": " 13.77",
+      "weight": 7.605939,
+      "length": 21.65354345
+    },
+    {
+      "date": "2021-01-04T11:06:04.870Z",
+      "percWeight": "0.97",
+      "percLenght": " 13.77",
+      "weight": 8.605939,
+      "length": 21.75354345
+    }
   ] ,
   "milestones" : [
     {
