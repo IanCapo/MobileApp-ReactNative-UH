@@ -7,7 +7,7 @@ const baseURL = "http://localhost:3002/";
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [first, setFirst] = useState(true)
+  const [noData, setNoData] = useState(false);
 
   useEffect(() => {
     fetch(baseURL + url)
@@ -19,10 +19,13 @@ const baseURL = "http://localhost:3002/";
        setError(res);
      })
      .then(data => {
-       if((!first && data.length === 0) || data.name === 'baby' ) return
+       if((data.length === 0) || (data.name === 'baby')) {
+        console.log('no data');
+        setNoData(true)
+        return
+       } 
        cache.storeData(url, data);
        setData(data);
-       setFirst(false)
      })
      .catch(err => {
        const data = cache.getData(url);

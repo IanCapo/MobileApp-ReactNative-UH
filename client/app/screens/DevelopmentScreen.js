@@ -13,7 +13,7 @@ import cache from '../utilities/cache';
 
 export default function DevelopmentScreen(props) {
   const [isLoading, setIsLoading] = useState(true)
-  const { data } = useApi.useFetch("development");
+  const { data, noData } = useApi.useFetch("development");
   const [myData, setMyData] = useState(data);
 
   const scrollView = useRef();
@@ -51,8 +51,20 @@ export default function DevelopmentScreen(props) {
     const graphData = [];
     myData.map((item) => labels.push(transformDate(item.date)))
     myData.map(item => graphData.push(item.percWeight*10))
+    let weight;
+    let length;
+    let date;
+    if(myData.length < 2) {
+     weight = myData[0].weight;
+     length = myData[0].length;
+     date = myData[0].date;
+    }
+
     return (
       <React.Fragment>
+        <View style={ styles.headlineContainer }>  
+          <Text style={ styles.headline }>Weight percenile</Text>
+        </View>
         <ScrollView 
           horizontal 
           ref={scrollView}
@@ -109,7 +121,7 @@ export default function DevelopmentScreen(props) {
   } else {
     return (
       <Screen style={ styles.screen }>
-        <Text>Loading</Text>
+        <Text>No data yet</Text>
       </Screen>
     )
   }
@@ -118,15 +130,24 @@ export default function DevelopmentScreen(props) {
 
 const styles = StyleSheet.create({
   heading: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10
+  },
+  headline: {
+    fontSize: 24,
+  },
+  headlineContainer: { 
+    paddingTop: 25,
+    width: "100%",
+    alignItems: 
+    "center" 
   },
   screen: {
     paddingLeft: 30
   },
   scrollView: {
-    paddingTop: 40,
+    paddingTop: 20,
     paddingBottom: 0,
     marginBottom: 0,
     height: "30%",

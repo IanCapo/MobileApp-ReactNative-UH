@@ -5,23 +5,36 @@ let myDevelopmentData = [];
 const getDevelopmentData = () => myDevelopmentData;
 
 const convertToPounds = (g) => {
-  return g * 0.00220462
+  return parseFloat(g * 0.00220462)
 }
 
 const convertToInches = (cm) => {
-  return cm * 0.39370079
+  return parseFloat(cm * 0.39370079)
+}
+
+const calcMonths = (a, b) => {
+  let dateA = new Date(a).getTime();
+  let dateB = new Date(b).getTime();
+  let diff = (dateA - dateB) / 1000
+  let result = diff / (60*60*24*7*4);
+  let rounded = Math.abs(Math.round(result), 10)
+  return rounded;
 }
 
 const addDevelopmentData = (data) => {
-  const sex = data[3].value;
-  const weight = convertToPounds(data[2].value);
+  console.log(data);
+  const date = data[0].value;
   const length = convertToInches(data[1].value);
-  const date = data[0];
+  const weight = convertToPounds(data[2].value);
+  const isSex = data[3].value === 'boy' ? 1 : 2
+  const sex = isSex;
+  const months = calcMonths(data[4], data[0].value);
   
-  getPercentile(weight, length, sex, 2, date);
+  getPercentile(weight, length, sex, months, date);
 }
 
 const getPercentile = async (weight, length, sex, months, date) => {
+  console.log(months);
   const url = `https://calm-ocean-03513.herokuapp.com/baby-percentile?sex=${sex}&months=${months}&inches=${length}&pounds=${weight}`;
   var req = unirest("GET", url);
 
@@ -35,11 +48,11 @@ const getPercentile = async (weight, length, sex, months, date) => {
   req.end(function (res) {
     if (res.error) throw new Error(res.error);
     let newEntry;
-    let weight = res.body.split(',')[0];
-    let length = res.body.split(',')[1];
+    let percWeight = res.body.split(',')[0];
+    let percLength = res.body.split(',')[1];
 
     newEntry = {
-      "date": date, percWeight: weight, percLenght: length
+      date: date, percWeight: percWeight, percLenght: percLength, weight: weight, length: length
     }
     pushData(newEntry)
   });
