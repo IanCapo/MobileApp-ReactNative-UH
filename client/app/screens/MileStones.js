@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import Screen from "../components/Screen";
 import ProgressItem from "../components/ProgressItem";
@@ -23,6 +23,9 @@ export default function MilesStones({ navigation }) {
 
   return (
   <Screen style={ styles.container }>
+      <View style={styles.headlineContainer}>
+        <Text style={styles.headline}>Milestones</Text>
+      </View>
     {isLoading && <Text>Please wait while we're fetching your data</Text>}
     {myData && myData.sort((a,b) => { 
       const itemA = new Date (a.date).getTime()
@@ -52,5 +55,14 @@ export default function MilesStones({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     padding: 30
-  }
+  },
+    headline: {
+    fontSize: 24,
+  },
+  headlineContainer: {
+    paddingTop: 25,
+    width: "100%",
+    alignItems:
+      "center"
+  },
 });

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Image, Text } from 'react-native';
+import { StyleSheet, Image, Text, View } from 'react-native';
 
 import Screen from '../../app/components/Screen'
 import InputWithLabel from '../components/InputWithLabel';
@@ -54,12 +54,11 @@ export default function ProfileScreen() {
     const date = `${dateArray[1]}.${dateArray[2]}.${dateArray[0]}`
     return (
       <Screen style={ styles.container }>
+        <View style={styles.headlineContainer}>
+          <Text style={styles.headline}>Welcome to this world, {myData.name}!</Text>
+        </View>
         { !editable ? renderImage() : renderImage() }
-          <InputWithLabel 
-            icon="baby-bottle-outline" 
-            placeholder={myData.name} 
-            type="text" 
-          />
+          
           <InputWithLabel 
             icon="calendar" 
             placeholder={date} 
@@ -87,7 +86,7 @@ export default function ProfileScreen() {
   } else if ( isLoading ) {
     return (
       <Screen style={ styles.container }>
-        <Text>Loading</Text>
+        <Text>No data yet, come back later</Text>
       </Screen>)
   }
 };
@@ -104,6 +103,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 10,
     alignSelf: "flex-start",
+  },
+  headline: {
+    fontSize: 24,
+    textAlign: 'center'
+  },
+  headlineContainer: {
+    width: "100%",
+    alignItems: "center",
+    paddingBottom: 20
   },
   iconEdit: {
     width: 50,

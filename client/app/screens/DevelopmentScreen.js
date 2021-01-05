@@ -63,7 +63,7 @@ export default function DevelopmentScreen(props) {
     return (
       <React.Fragment>
         <View style={ styles.headlineContainer }>  
-          <Text style={ styles.headline }>Weight percenile</Text>
+          <Text style={ styles.headline }>Weight percentile</Text>
         </View>
         <ScrollView 
           horizontal 
@@ -121,7 +121,7 @@ export default function DevelopmentScreen(props) {
   } else {
     return (
       <Screen style={ styles.screen }>
-        <Text>No data yet</Text>
+        <Text>No data yet, come back later</Text>
       </Screen>
     )
   }
@@ -137,11 +137,11 @@ const styles = StyleSheet.create({
   headline: {
     fontSize: 24,
   },
-  headlineContainer: { 
-    paddingTop: 25,
+  headlineContainer: {
+    paddingTop: 40,
     width: "100%",
-    alignItems: 
-    "center" 
+    alignItems:
+      "center"
   },
   screen: {
     paddingLeft: 30
