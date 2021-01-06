@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import calcPercentile from '../utilities/calcPercentile';
 
 const storeData = async (key, value) => {
   try {
@@ -12,8 +13,17 @@ const storeData = async (key, value) => {
         key: `${value.dob}_1`,
         icon: 'baby-carriage'
       }];
+      const devData = [{
+        date: value.dob,
+        length: value.length,
+        weight: value.weight,
+        sex: value.sex,
+        refDate: value.key
+      }]
+      calcPercentile(value)
       try {
         await AsyncStorage.setItem('milestones', JSON.stringify(milestone));
+       // await AsyncStorage.setItem('development', JSON.stringify(devData));
         await AsyncStorage.setItem('user', JSON.stringify({user: true}));
       } catch (e) {
         console.log(e);
@@ -48,24 +58,27 @@ const getData = async (key) => {
 };
 
 const addData = async (key, value) => {
-  AsyncStorage.getItem(key)
-  .then(data => {
-    console.log('oldData', data);
-    const arr = [];
-    if(data) {
-      data = JSON.parse(data);
-      data.forEach(item => {
-        arr.push(item)
-      })
-      arr.push(value)
-    } else {
-      arr.push(value)
-    }
-   
-    console.log(arr);
+  const arr = [];
+  let newEntry = key === 'development' ? await calcPercentile(value) : value;
 
-   AsyncStorage.setItem(key, JSON.stringify(arr));
-  })
+    AsyncStorage.getItem(key)
+    .then(data => {
+      if(data) {
+        data = JSON.parse(data);
+        data.forEach(item => {
+          arr.push(item)
+        })
+        console.log(newEntry);
+        arr.push(newEntry)
+      } else {
+        console.log(newEntry);
+        arr.push(newEntry)
+      }
+    
+      console.log(arr);
+
+    AsyncStorage.setItem(key, JSON.stringify(arr));
+    })
 }
 
 removeFew = async () => {
