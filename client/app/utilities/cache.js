@@ -4,14 +4,14 @@ const storeData = async (key, value) => {
   try {
     const jsonValue = await AsyncStorage.getItem('user');
     if (key === 'profile' && !jsonValue) {
-      const milestone = {
+      const milestone = [{
         date: value.dob,
         title: 'Birth',
         description: 'Today I was born',
         image: value.image,
         key: `${value.dob}_1`,
         icon: 'baby-carriage'
-      }
+      }];
       try {
         await AsyncStorage.setItem('milestones', JSON.stringify(milestone));
         await AsyncStorage.setItem('user', JSON.stringify({user: true}));
@@ -50,10 +50,13 @@ const getData = async (key) => {
 const addData = async (key, value) => {
   AsyncStorage.getItem(key)
   .then(data => {
+    console.log('oldData', data);
     const arr = [];
     if(data) {
       data = JSON.parse(data);
-      arr.push(data)
+      data.forEach(item => {
+        arr.push(item)
+      })
       arr.push(value)
     } else {
       arr.push(value)

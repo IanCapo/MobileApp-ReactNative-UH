@@ -3,21 +3,20 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import Screen from "../components/Screen";
 import ProgressItem from "../components/ProgressItem";
-import useApi from '../hooks/useApi';
 import cache from '../utilities/cache';
 
 
 export default function MilesStones({ navigation }) {
   const [isLoading, setIsLoading] = useState(true)
-  //const { data } = useApi.useFetch("milestones");
   const [myData, setMyData] = useState();
 
   useEffect(() => {
     const cachedData = async () => {
       const data = await cache.getData('milestones');
-      console.log('data', data);
-      const newDataObj = [JSON.parse(data.data)]
+      const newDataObj = JSON.parse(data.data);
+  
       setMyData(newDataObj);
+      
       setIsLoading(false);
     }
     cachedData()

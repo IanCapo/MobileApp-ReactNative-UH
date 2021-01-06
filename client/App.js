@@ -4,7 +4,6 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import TabNavigator from './app/navigation/TabNavigator';
 import cache from  './app/utilities/cache';
-import { render } from 'react-dom';
 
 function App() {
   const [user, setUser] = useState(false);
