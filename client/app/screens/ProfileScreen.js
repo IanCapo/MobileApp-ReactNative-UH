@@ -5,7 +5,6 @@ import Screen from '../../app/components/Screen'
 import InputWithLabel from '../components/InputWithLabel';
 import ImageInput from '../../app/components/ImageInput'
 
-import useApi from '../hooks/useApi';
 import usePutData from '../hooks/usePutData';
 import colors from '../utilities/colors';
 import cache from '../utilities/cache';
@@ -13,9 +12,8 @@ import cache from '../utilities/cache';
 
 export default function ProfileScreen() {
   const [isLoading, setIsLoading] = useState(true)
-  const { data } = useApi.useFetch("profile");
   const [editable, setEditable] = useState(false); 
-  const [myData, setMyData] = useState(data)
+  const [myData, setMyData] = useState()
 
  useEffect(() => {
    const cachedData = async () => {
@@ -24,7 +22,7 @@ export default function ProfileScreen() {
      setIsLoading(false)
    }
    cachedData()
- }, [])
+ }, []);
   
   const renderImage = () => {
     if(editable) {

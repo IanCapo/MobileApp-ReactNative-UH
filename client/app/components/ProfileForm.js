@@ -9,8 +9,6 @@ import ImageInput from '../components/ImageInput';
 import DatePicker from './DatePicker';
 import Screen from './Screen';
 import SwitchComponent from './Switch';
-import usePostData from '../hooks/usePostData';
-import useApi from "../hooks/useApi";
 import cache from '../utilities/cache';
 
 
@@ -21,36 +19,33 @@ export default function Form({navigation}) {
   let img = image;
   let sx = sex;
 
-  const { data } = useApi.useFetch("profile");
 
   useEffect(() => {
     const cachedData = async () => {
       const jsonData = await cache.getData('profile')
-      const data = JSON.parse(jsonData.data)
-      setImage(data.image.url);
+      if(jsonData.ok){
+        const data = JSON.parse(jsonData.data)
+        setImage(data.image.url);
+      }
     }
     cachedData()
   }, [])
 
   const handleSubmit = async (data) => {
-    let body = [];
-      let name = { key: "name", value: data["name"] };
-      let dob = { key: "dob", value: todayDate };
-      let weight = { key: "weight", value: data["weight"] };
-      let length = { key: "length", value: data["length"] };
-      let sex = {"key": "sex", "value": sx};
-      let image = { key: "image", value: img}
-      body.push(name, dob, weight, length, image, sex);
+    let body = {
+        name: data["name"],
+        dob: todayDate,
+        weight: data["weight"],
+        length: data["length"],
+        sex: sx,
+        image: {
+          url: img
+        }
+      };
 
-      const result = await usePostData("profile",
-        body
-      );
+      cache.storeData('profile', body)
+      navigation.navigate('dashboard');
       
-      if (result === 201) {
-        navigation.navigate('Dashboard')
-      } else {
-        console.log("error");
-      }
   };
 
   const initialValues = {

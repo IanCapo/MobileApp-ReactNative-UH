@@ -9,13 +9,15 @@ import cache from '../utilities/cache';
 
 export default function MilesStones({ navigation }) {
   const [isLoading, setIsLoading] = useState(true)
-  const { data } = useApi.useFetch("milestones");
-  const [myData, setMyData] = useState(data);
+  //const { data } = useApi.useFetch("milestones");
+  const [myData, setMyData] = useState();
 
   useEffect(() => {
     const cachedData = async () => {
-      const data = await cache.getData('milestones')
-      setMyData(JSON.parse(data.data));
+      const data = await cache.getData('milestones');
+      console.log('data', data);
+      const newDataObj = [JSON.parse(data.data)]
+      setMyData(newDataObj);
       setIsLoading(false);
     }
     cachedData()
@@ -27,26 +29,27 @@ export default function MilesStones({ navigation }) {
         <Text style={styles.headline}>Milestones</Text>
       </View>
     {isLoading && <Text>Please wait while we're fetching your data</Text>}
-    {myData && myData.sort((a,b) => { 
-      const itemA = new Date (a.date).getTime()
-      const itemB = new Date(b.date).getTime()
-      const item = itemA - itemB;
-      return item
-     }
-     ).map((item, index) => {
-      return (
-        <ProgressItem 
-          onPress={() => navigation.navigate('MilestoneDetail', { otherParam: item })} 
-          lastItem={index === myData.length - 1}
-          text={item.title}
-          icon={item.icon}
-          date={item.date}
-          key={item.id}
+  
+    {myData && myData.sort((a, b) => {
+        const itemA = new Date(a.date).getTime()
+        const itemB = new Date(b.date).getTime()
+        const item = itemA - itemB;
+        return item
+      }
+      ).map((item, index) => {
+        return (
+          <ProgressItem
+            onPress={() => navigation.navigate('MilestoneDetail', { otherParam: item })}
+            lastItem={index === myData.length - 1}
+            text={item.title}
+            icon={item.icon}
+            date={item.date}
+            key={item.key}
           />
         )
       }
-      ) 
-    }
+      )
+      }
     </Screen>
   );
 };

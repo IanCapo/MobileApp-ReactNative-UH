@@ -10,18 +10,21 @@ import DevelopmentForm from '../components/DevelopmentForm';
 import MemoriesForm from '../components/MemoriesForm';
 import MilestonesForm from '../components/MilestonesForm';
 
+import cache from '../utilities/cache';
+
 export default function AddScreen({onPress}) {
   const [category, setCategory] = useState('milestones');
 
   const handleSubmit = async (body) => {
-      const result = await usePostData(`${category}`,
-        body
-      )
-      if(result === 201){
-        onPress()
-      } else {
-        console.log("error");
-      }
+      cache.addData(category, body)
+      // const result = await usePostData(`${category}`,
+      //   body
+      // )
+      // if(result === 201){
+      //   onPress()
+      // } else {
+      //   console.log("error");
+      // }
    
   }
 

@@ -13,11 +13,10 @@ import DashboardStack from './DashboardStack';
 
 const Tab = createBottomTabNavigator();
 
-export default function Navigator() {
-
+export default function Navigator({initialRouteName}) {
   return (
     <Tab.Navigator 
-      initialRouteName={Dashboard} 
+      initialRouteName={initialRouteName} 
       tabBarOptions={{
       showLabel: false
     }}
