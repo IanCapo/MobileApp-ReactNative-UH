@@ -3,7 +3,6 @@ import { View, Button, Platform, StyleSheet } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import Icon from './Icon';
-import colors from '../utilities/colors';
 
 export default function DatePicker({ onPress, thisDate }) {
   const [date, setDate] = useState(thisDate);

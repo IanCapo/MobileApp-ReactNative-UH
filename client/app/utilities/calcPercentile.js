@@ -1,5 +1,4 @@
 const addDevelopmentData = async (data) => {
-  console.log(data.refDate);
   const date = data.date;
   const length = convertToInches(data.length);
   const weight = convertToPounds(data.weight);
@@ -21,7 +20,6 @@ const convertToInches = (cm) => {
 }
 
 const calcMonths = (a, b) => {
-  console.log(a, b);
   let dateA = new Date(a).getTime();
   let dateB = new Date(b).getTime();
   let diff = (dateA - dateB) / 1000
@@ -33,7 +31,6 @@ const calcMonths = (a, b) => {
 const getPercentile = async (weight, length, sex, months, date) => {
   months === 0 ? months =+1 : months = months;
   const url = `https://calm-ocean-03513.herokuapp.com/baby-percentile?sex=${sex}&months=${months}&inches=${length}&pounds=${weight}`;
-  console.log(url);
   let response = await fetch(url)
 
   if(response.ok) {
@@ -42,8 +39,6 @@ const getPercentile = async (weight, length, sex, months, date) => {
   } else {
     console.log('error', response.status);
   }
-
-
 }
 
 const createNewEntry = (perc, weight, length, date) => {
@@ -56,6 +51,5 @@ const createNewEntry = (perc, weight, length, date) => {
     }
     return newEntry
 }
-
 
 export default addDevelopmentData;
