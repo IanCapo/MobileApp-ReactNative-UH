@@ -9,7 +9,6 @@ import ImageInput from './ImageInput';
 import DatePicker from './DatePicker';
 import IconPicker from './IconPicker';
 
-
 export default function Form({ initialValues, onPress }) {
   const [image, setImage] = useState();
   const [date, setDate] = useState(new Date());
@@ -18,12 +17,14 @@ export default function Form({ initialValues, onPress }) {
 
   const handleSubmit = (data, {resetForm}) => {
     const body = {
-      "title": data["title"],
-      "icon": myIcon,
-      "date": date,
-      "description": data["description"],
-      "image": { url: img }
+      title: data["title"],
+      icon: myIcon,
+      date: date,
+      description: data["description"],
+      image: { url: img },
+      key: new Date()
     }
+
     onPress(body);
     setDate(new Date());
     resetForm();

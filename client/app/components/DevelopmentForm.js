@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, TextInput, Text, View } from 'react-native';
 import * as Yup from "yup";
 import { Formik } from 'formik';
@@ -6,19 +6,36 @@ import { Formik } from 'formik';
 import colors from '../utilities/colors';
 import Icon from './Icon';
 import DatePicker from './DatePicker';
+import cache from "../utilities/cache";
 
 
 export default function Form({ initialValues, onPress }) {
   const [todayDate, setDate] = useState(new Date());
+  const [dob, setDob] = useState();
+  const [sex, setSex] = useState();
+
+  useEffect(() => {
+    const cachedData = async () => {
+      const jsonData = await cache.getData('profile')
+      if (jsonData.ok) {
+        const data = JSON.parse(jsonData.data)
+        setDob(data.dob);
+        setSex(data.sex);
+      }
+    }
+    cachedData()
+  }, [])
+
 
   const handleSubmit = (data, {resetForm}) => {
-    let body = [];
-      let date = {"key": "date",  "value":  todayDate}; 
-      let length = {"key": "length", "value": data["length"] };
-      let sex = { "key": "sex", "value": 'boy' }
-      let weight = {"key": "weight", "value": data["weight"] };
-      body.push(date, length, weight, sex)
-      console.log(body);
+    let body = {
+      date:  todayDate,
+      length: data["length"],
+      weight: data["weight"],
+      refDate: dob,
+      sex: sex
+    }
+    
       onPress(body);
       setDate(new Date());
       resetForm()

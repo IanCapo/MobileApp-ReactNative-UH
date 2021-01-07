@@ -8,6 +8,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import Dashboard from '../screens/Dashboard';
 import MemoryDetailsScreen from '../screens/MemoryDetailsScreen';
 import MilestoneDetailScreen from '../screens/MilestoneDetailScreen';
+import AddScreenHolder from '../screens/AddScreenHolder';
 
 
 const Stack = createStackNavigator();
@@ -39,6 +40,10 @@ const DashboardStack = () => (
       name="MilestoneDetail"
       component={MilestoneDetailScreen}
       options={{ headerShown: true }} />
+    <Stack.Screen
+      name="AfterSubmitOptions"
+      component={AddScreenHolder}
+      options={{ headerShown: false }} />
   </Stack.Navigator>
 )
 

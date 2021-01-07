@@ -10,17 +10,17 @@ import DatePicker from './DatePicker';
 
 
 export default function Form({ initialValues, onPress }) {
-  const [isReset, setIsReset] = useState(true)
   const [image, setImage] = useState();
   const [date, setDate] = useState(new Date());
   let img = image;
 
   const handleSubmit = (data, {resetForm}) => {
     const body = {
-      "title": data["title"],
-      "date": date,
-      "description": data["description"],
-      "image": { url: img }
+      title: data["title"],
+      date: date,
+      description: data["description"],
+      image: { url: img },
+      key: new Date()
     }
     onPress(body);
     resetForm();

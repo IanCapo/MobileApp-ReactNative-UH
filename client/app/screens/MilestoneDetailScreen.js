@@ -13,7 +13,7 @@ export default function MilestoneDetailScreen({ route }) {
       <View style={styles.detailsContainer}>
         <Text style={styles.title}>{otherParam.title}</Text>
         <Text style={styles.date}>{date}</Text>
-        <Text>{otherParam.info}</Text>
+        <Text>{otherParam.description}</Text>
       </View>
     </Screen>
   );

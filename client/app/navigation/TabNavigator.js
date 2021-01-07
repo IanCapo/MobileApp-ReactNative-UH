@@ -4,8 +4,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import colors from '../utilities/colors';
 import Dashboard from '../screens/Dashboard';
-import AddScreenHolder from '../screens/AddScreenHolder';
-import Settings from '../screens/Settings';
+import AddScreen from '../screens/AddScreen';
 import ProfileForm from '../components/ProfileForm';
 import AddButton from "./AddButton";
 import DashboardStack from './DashboardStack';
@@ -13,11 +12,10 @@ import DashboardStack from './DashboardStack';
 
 const Tab = createBottomTabNavigator();
 
-export default function Navigator() {
-
+export default function Navigator({initialRouteName}) {
   return (
     <Tab.Navigator 
-      initialRouteName={Dashboard} 
+      initialRouteName={initialRouteName} 
       tabBarOptions={{
       showLabel: false
     }}
@@ -29,7 +27,7 @@ export default function Navigator() {
       />
       <Tab.Screen
         name="Add"
-        component={AddScreenHolder}
+        component={AddScreen}
         options={({ navigation }) => ({
           tabBarButton: () =>
             <AddButton onPress={() => navigation.navigate('Add')} />,
