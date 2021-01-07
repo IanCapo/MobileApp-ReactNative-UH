@@ -149,7 +149,8 @@ const styles = StyleSheet.create({
       "center"
   },
   screen: {
-    paddingLeft: 30
+    paddingLeft: 30,
+    paddingBottom: 40
   },
   scrollView: {
     paddingTop: 20,

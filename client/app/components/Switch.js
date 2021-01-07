@@ -9,6 +9,7 @@ import colors from '../utilities/colors';
 
 const SwitchComponent = ({onPress}) => {
   const [switchValue, setSwitchValue] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(false);
 
   const toggleSwitch = (value) => {
     setSwitchValue(value);
@@ -18,15 +19,16 @@ const SwitchComponent = ({onPress}) => {
   return (
       <View style={styles.container}>
       <Text>
-        {switchValue ? 'Boy' : 'Girl'}
+        Girl
       </Text>
         <Switch
-          style={{ marginLeft: 10 }}
+          style={{ marginLeft: 10, marginRight: 10 }}
           onValueChange={toggleSwitch}
           value={switchValue}
-          trackColor={colors.yellow}
-          ios_backgroundColor={colors.secondary}
+          trackColor={{ false: 'lightgray', true: 'lightgray' }}
+          thumbColor={isEnabled ? "#7D84B2" : colors.yellow}
         />
+        <Text>Boy</Text>
       </View>
   );
 };

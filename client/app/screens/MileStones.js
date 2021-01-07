@@ -40,7 +40,7 @@ export default function MilesStones({ navigation }) {
             onPress={() => navigation.navigate('MilestoneDetail', { otherParam: item })}
             lastItem={index === myData.length - 1}
             text={item.title}
-            icon={item.icon}
+            icon={item.icon ? item.icon : 'foot-print'}
             date={item.date}
             key={item.key}
           />
