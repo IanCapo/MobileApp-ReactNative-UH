@@ -13,17 +13,18 @@ const storeData = async (key, value) => {
         key: `${value.dob}_1`,
         icon: 'baby-carriage'
       }];
-      const devData = [{
+      let devData = {
         date: value.dob,
         length: value.length,
         weight: value.weight,
         sex: value.sex,
-        refDate: value.key
-      }]
-      calcPercentile(value)
+        refDate: value.dob
+      }
+      devData = await calcPercentile(devData);
       try {
+        console.log(key);
         await AsyncStorage.setItem('milestones', JSON.stringify(milestone));
-       // await AsyncStorage.setItem('development', JSON.stringify(devData));
+        await AsyncStorage.setItem('development', JSON.stringify([devData]));
         await AsyncStorage.setItem('user', JSON.stringify({user: true}));
       } catch (e) {
         console.log(e);
@@ -32,7 +33,7 @@ const storeData = async (key, value) => {
   } catch (e) {
     console.log(e);
   }
-  try {
+  try {;
     const jsonValue = JSON.stringify(value)
     await AsyncStorage.setItem(key, jsonValue)
   } catch (e) {
@@ -60,7 +61,7 @@ const getData = async (key) => {
 const addData = async (key, value) => {
   const arr = [];
   let newEntry = key === 'development' ? await calcPercentile(value) : value;
-
+  console.log('test');
     AsyncStorage.getItem(key)
     .then(data => {
       if(data) {

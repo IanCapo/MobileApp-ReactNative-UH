@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 
-import usePostData from '../hooks/usePostData';
 import Screen from '../components/Screen';
 import CategoryPickerItem from '../components/CategoryPickerItem';
 import VerticalLine from "../components/VerticalLine";
@@ -12,20 +11,13 @@ import MilestonesForm from '../components/MilestonesForm';
 
 import cache from '../utilities/cache';
 
-export default function AddScreen({onPress}) {
+export default function AddScreen({onPress, navigation}) {
   const [category, setCategory] = useState('milestones');
 
   const handleSubmit = async (body) => {
-      cache.addData(category, body)
-      // const result = await usePostData(`${category}`,
-      //   body
-      // )
-      // if(result === 201){
-      //   onPress()
-      // } else {
-      //   console.log("error");
-      // }
-   
+    console.log(category);
+      cache.addData(category, body);
+      navigation.navigate('AfterSubmitOptions')
   }
 
   const items = [

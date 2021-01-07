@@ -11,10 +11,12 @@ export default function MemoriesScreen({navigation}) {
 
   useEffect(() => {
     const cachedData = async () => {
-      const data = await cache.getData('milestones');
-      const newDataObj = JSON.parse(data.data)
-      setMyData(newDataObj);
-      setIsLoading(false);
+      const data = await cache.getData('memories');
+      if (data) {
+        const newDataObj = JSON.parse(data.data)
+        setMyData(newDataObj);
+        setIsLoading(false);
+      }
     }
     cachedData()
   }, [])

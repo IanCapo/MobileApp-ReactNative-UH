@@ -45,10 +45,17 @@ export default function DevelopmentScreen(props) {
   }
 
   if(myData) {
+    
+    const sortedmyData = myData.sort((a, b) => {
+      var c = new Date(a.date).getTime();
+      var d = new Date(b.date).getTime();
+      return c - d;
+    });
+
     const labels = [];
     const graphData = [];
-    myData.map((item) => labels.push(transformDate(item.date)))
-    myData.map(item => graphData.push(item.percWeight*10))
+    sortedmyData.map((item) => labels.push(transformDate(item.date)))
+    sortedmyData.map(item => graphData.push(item.percWeight*10))
     let weight;
     let length;
     let date;
