@@ -6,7 +6,7 @@ import Icon from './Icon'
 
 export default function ImageWithIcon({image}) {
   return (
-  <View>
+  <View style={ styles.container } >
     <Image source={{ uri: image }} style={ styles.image } />
     <Icon name="camera" size={30} color="darkgrey" backgroundColor={colors.primary} style={styles.icon} />
     </View>
@@ -15,6 +15,9 @@ export default function ImageWithIcon({image}) {
 
 
 const styles = StyleSheet.create({
+  container: {
+    height: 170
+  },
   image: {
     width: 150,
     height: 150,
