@@ -7,6 +7,7 @@ export default function MilestoneDetailScreen({ route }) {
   const { key, otherParam } = route.params;
   const dateArray = otherParam.date.split('T')[0].split('-');
   const date = `${dateArray[1]}.${dateArray[2]}.${dateArray[0]}`;
+  
   return (
     <Screen key={key} style={styles.container}>
       <Image source={{uri: otherParam.image.url}} style={styles.image} />

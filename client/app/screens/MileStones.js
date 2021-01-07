@@ -16,7 +16,6 @@ export default function MilesStones({ navigation }) {
       const newDataObj = JSON.parse(data.data);
   
       setMyData(newDataObj);
-      
       setIsLoading(false);
     }
     cachedData()

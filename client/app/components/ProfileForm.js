@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, TextInput, Text } from 'react-native';
+import { StyleSheet, TextInput, Text, View } from 'react-native';
 import * as Yup from "yup";
 import { Formik } from 'formik';
 
@@ -10,6 +10,7 @@ import DatePicker from './DatePicker';
 import Screen from './Screen';
 import SwitchComponent from './Switch';
 import cache from '../utilities/cache';
+import { color } from 'react-native-reanimated';
 
 
 export default function Form({navigation}) {
@@ -84,8 +85,12 @@ export default function Form({navigation}) {
           {touched.name && errors.name &&
             <Text style={{ fontSize: 10, color: 'red' }}>{errors.name}</Text>
           }
+          <Text style={styles.text}>Date of birth</Text>
           <DatePicker thisDate={todayDate} onPress={(value) => setDate(value)} />
-          <SwitchComponent onPress={value => setSex(value)} />
+          <View style={ styles.switch }>
+            <Text style={styles.text}>Sex</Text>
+            <SwitchComponent onPress={value => setSex(value)} />
+          </View>
           <Text style={styles.text}>Weight in g</Text>
           <TextInput
             value={values.weight}
@@ -154,7 +159,13 @@ const styles = StyleSheet.create({
     color: colors.primary
   },
   switch: {
-    alignSelf: 'flex-start'
+    flexDirection: 'row',
+    width: "100%",
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingRight: 39
   },
   text: {
     left: 10,

@@ -17,27 +17,26 @@ const SwitchComponent = ({onPress}) => {
 
   return (
       <View style={styles.container}>
+      <Text>
+        {switchValue ? 'Boy' : 'Girl'}
+      </Text>
         <Switch
-          style={{ marginTop: 30, marginBottom: 10 }}
+          style={{ marginLeft: 10 }}
           onValueChange={toggleSwitch}
           value={switchValue}
           trackColor={colors.yellow}
           ios_backgroundColor={colors.secondary}
         />
-      <Text>
-        {switchValue ? 'Boy' : 'Girl'}
-      </Text>
       </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    alignSelf: 'flex-start',
-    marginBottom: 10
+    marginTop: 10
   },
 });
 

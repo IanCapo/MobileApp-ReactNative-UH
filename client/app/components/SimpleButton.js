@@ -3,9 +3,9 @@ import { StyleSheet, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import colors from '../utilities/colors';
 
-export default function SimpleButton({text, onPress}) {
+export default function SimpleButton({text, onPress, style}) {
   return (
-  <TouchableOpacity style={ styles.container } onPress={onPress}>
+  <TouchableOpacity style={ [styles.container], style } onPress={onPress}>
       <Text>{text}</Text>
     </TouchableOpacity>
   );

@@ -3,7 +3,6 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 
 import Icon from '../components/Icon';
-
 import Screen from '../components/Screen';
 import colors from '../utilities/colors';
 

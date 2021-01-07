@@ -5,7 +5,6 @@ import SimpleButton from '../components/SimpleButton'
 
 
 export default function AddScreenHolder({navigation}) {
-
   return (
       <View style={styles.container}>
         <SimpleButton text="Add new entry" onPress={() => navigation.navigate('Add')}/>
