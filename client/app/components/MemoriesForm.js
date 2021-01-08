@@ -38,7 +38,7 @@ export default function Form({ initialValues, onPress }) {
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
     >
-      {({ values, handleChange, setFieldTouched, touched, isValid, errors, handleSubmit }) => (
+      {({ values, handleChange, setFieldTouched, touched, isValid = false, errors, handleSubmit }) => (
         <View style={ styles.container }>
         <ImageInput value={values.image} style={ styles.image } onPress={value => setImage(value)} />
         <Text style={ styles.text }>Title</Text>
@@ -72,7 +72,7 @@ export default function Form({ initialValues, onPress }) {
             onPress={isValid && handleSubmit}
             style={styles.icon} 
             size={30}
-            backgroundColor={isValid ? colors.green : colors.primary}
+            backgroundColor={colors.green}
           />
         </View>
       )}

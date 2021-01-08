@@ -76,7 +76,7 @@ export default function Form({navigation}) {
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
     >
-      {({ values, handleChange, setFieldTouched, touched, errors, handleSubmit }) => (
+      {({ values, handleChange, setFieldTouched, touched, errors, isValid, handleSubmit }) => (
         <Screen style={ styles.container }>
         <Text style={ styles.headline }>Update your childs profile</Text>
         {myData && <ImageInput value={values.image} existingImage={image} onPress={img => setImage(img)} />}
@@ -131,6 +131,7 @@ export default function Form({navigation}) {
             onPress={handleSubmit}
             style={ styles.button }
             size={30}
+            backgroundColor={isValid ? colors.green : colors.white}
           />
         </Screen>
       )}

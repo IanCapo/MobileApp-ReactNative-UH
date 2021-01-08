@@ -87,7 +87,7 @@ export default function Form({ initialValues, onPress }) {
             onPress={isValid && handleSubmit}
             style={ styles.icon } 
             size={30}
-            backgroundColor={isValid ? colors.green : colors.primary}
+            backgroundColor={colors.green}
           />
         </View>
       )}
