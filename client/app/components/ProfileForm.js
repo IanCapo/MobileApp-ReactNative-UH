@@ -10,7 +10,6 @@ import DatePicker from './DatePicker';
 import Screen from './Screen';
 import SwitchComponent from './Switch';
 import cache from '../utilities/cache';
-import { color } from 'react-native-reanimated';
 
 
 export default function Form({navigation}) {

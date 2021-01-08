@@ -6,7 +6,6 @@ import Icon from './Icon';
 import colors from '../utilities/colors';
 
 export default function DatePicker({ onPress, thisDate }) {
-  console.log(typeof thisDate);
   const [date, setDate] = useState(thisDate);
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);

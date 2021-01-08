@@ -1,14 +1,16 @@
 import React from 'react';
-import { View, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 
-import SimpleButton from '../components/SimpleButton'
+import SimpleButton from '../components/SimpleButton';
+import colors from '../utilities/colors';
 
 
 export default function AddScreenHolder({navigation}) {
   return (
       <View style={styles.container}>
-        <SimpleButton text="Add new entry" onPress={() => navigation.navigate('Add')}/>
-        <SimpleButton text="Go to dashboard" onPress={() => navigation.navigate('Dashboard') }/>
+        <Text>Congrats - we're processing your data. What's next?</Text>
+        <SimpleButton style={ styles.button} text="Add new entry" onPress={() => navigation.navigate('Add')}/>
+      <SimpleButton style={styles.button}  text="Go to dashboard" onPress={() => navigation.navigate('Dashboard', {Screen: 'Dashbaord'}) }/>
     </View>
   );
 };
@@ -24,7 +26,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   button: {
-    marginTop: 40,
-    marginBottom: 20
+    width: 250,
+    padding: 12,
+    marginTop: 20,
+    backgroundColor: colors.secondary,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5
   }
 });

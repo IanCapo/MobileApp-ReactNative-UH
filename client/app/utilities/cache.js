@@ -61,7 +61,6 @@ const getData = async (key) => {
 const addData = async (key, value) => {
   const arr = [];
   let newEntry = key === 'development' ? await calcPercentile(value) : value;
-  console.log('test');
     AsyncStorage.getItem(key)
     .then(data => {
       if(data) {
@@ -75,8 +74,6 @@ const addData = async (key, value) => {
         console.log(newEntry);
         arr.push(newEntry)
       }
-    
-      console.log(arr);
 
     AsyncStorage.setItem(key, JSON.stringify(arr));
     })
