@@ -14,7 +14,7 @@ import AddScreenHolder from '../screens/AddScreenHolder';
 const Stack = createStackNavigator();
 
 const DashboardStack = () => (
-  <Stack.Navigator screenOptions={{ headerShown: false }}>
+  <Stack.Navigator initialRouteName="Dashboard" screenOptions={{ headerShown: false }}>
     <Stack.Screen
       name="Dashboard"
       component={Dashboard}

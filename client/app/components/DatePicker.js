@@ -6,6 +6,7 @@ import Icon from './Icon';
 import colors from '../utilities/colors';
 
 export default function DatePicker({ onPress, thisDate }) {
+  console.log(typeof thisDate);
   const [date, setDate] = useState(thisDate);
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
@@ -34,7 +35,7 @@ export default function DatePicker({ onPress, thisDate }) {
     setCalendarIcon(true)
   }
 
-  const today = date.getDate().toString() + '.' + (date.getMonth() + 1).toString() + '.' + date.getFullYear().toString()
+  const today = new Date(date).getDate().toString() + '.' + (new Date(date).getMonth() + 1).toString() + '.' + new Date(date).getFullYear().toString()
 
   return (
     <View style={styles.container}>
@@ -45,7 +46,7 @@ export default function DatePicker({ onPress, thisDate }) {
       {show && 
         <DateTimePicker
           testID="dateTimePicker"
-          value={date}
+          value={new Date(date)}
           mode={mode}
           is24Hour={true}
           display="spinner"

@@ -17,6 +17,7 @@ export default function Form({navigation}) {
   const [image, setImage] = useState();
   const [todayDate, setDate] = useState(new Date());
   const [sex, setSex] = useState('girl');
+  const [myData,setMyData] = useState(false)
   let img = image;
   let sx = sex;
 
@@ -27,6 +28,7 @@ export default function Form({navigation}) {
       if(jsonData.ok){
         const data = JSON.parse(jsonData.data)
         setImage(data.image.url);
+        setMyData(data)
       }
     }
     cachedData()
@@ -34,34 +36,40 @@ export default function Form({navigation}) {
 
   const handleSubmit = async (data) => {
     let body = {
-        name: data["name"],
-        dob: todayDate,
-        weight: data["weight"],
-        length: data["length"],
-        sex: sx,
+        name: data["name"] ? data["name"] : myData ? myData.name : '',
+        dob: todayDate ? todayDate : myData ? myData.dob : '',
+        weight: data["weight"] ? data["weight"] : myData ? myData.weight : null,
+        length: data["length"] ? data["length"] : myData ? myData.length : null,
+        sex: sx ? sx : myData ? myData.sex : '',
         image: {
-          url: img
+          url: img ?img : myData ? myData.img.url : ''
         }
       };
-
       cache.storeData('profile', body)
-      navigation.navigate('dashboard');
-      
+      navigation.navigate('dashboard'); 
   };
 
   const initialValues = {
-     "name": "",
-     "dob": "",
-     "sex": "",
-     "weight": "",
-     "length": ""
+     "name": myData ? myData.name : '',
+     "dob": myData ? new Date(myData.dob) : '',
+     "sex": myData ? myData.sex : '',
+     "weight": myData ? myData.weight : '',
+     "length": myData ? myData.length : '',
   }
 
-  const validationSchema = Yup.object().shape({
+  let validationSchema = Yup.object().shape({
     name: Yup.string().required().min(1).label("Name"),
     weight: Yup.number().required().label("Weight"),
     length: Yup.number().required().label("length")
   });
+  
+  if(myData) {
+    validationSchema = Yup.object().shape({
+      name: Yup.string().min(1).label("Name"),
+      weight: Yup.number().label("Weight"),
+      length: Yup.number().label("length")
+    });
+  } 
 
   return (
     <Formik
@@ -72,13 +80,14 @@ export default function Form({navigation}) {
       {({ values, handleChange, setFieldTouched, touched, errors, handleSubmit }) => (
         <Screen style={ styles.container }>
         <Text style={ styles.headline }>Update your childs profile</Text>
-        <ImageInput value={values.image} onPress={img => setImage(img)} />
+        {myData && <ImageInput value={values.image} existingImage={image} onPress={img => setImage(img)} />}
+        {!myData && <ImageInput value={values.image} onPress={img => setImage(img)} />}
         <Text style={ styles.text }>Name of your child</Text>
           <TextInput
-            value={values.name}
+            value={values.name ? values.name : myData.name}
             onChangeText={handleChange('name')}
             onBlur={() => setFieldTouched('name')}
-            placeholder="name"
+            placeholder={myData ? myData.name : "name"}
             style={ styles.input}
             placeholderTextColor={ colors.primary }
           />
@@ -86,16 +95,17 @@ export default function Form({navigation}) {
             <Text style={{ fontSize: 10, color: 'red' }}>{errors.name}</Text>
           }
           <Text style={styles.text}>Date of birth</Text>
-          <DatePicker thisDate={todayDate} onPress={(value) => setDate(value)} />
+          {myData && <DatePicker thisDate={myData.dob} onPress={(value) => setDate(value)} /> }
+          {!myData && <DatePicker thisDate={todayDate} onPress={(value) => setDate(value)} />}
           <View style={ styles.switch }>
             <Text style={styles.text}>Sex</Text>
-            <SwitchComponent onPress={value => setSex(value)} />
+            <SwitchComponent value={myData.sex} onPress={value => setSex(value)} />
           </View>
           <Text style={styles.text}>Weight in g</Text>
           <TextInput
             value={values.weight}
             onChangeText={handleChange('weight')}
-            placeholder="Weight"
+            placeholder={ myData ? myData.weight : "Weight" }
             onBlur={() => setFieldTouched('weight')}
             style={styles.input}
             placeholderTextColor={colors.primary}
@@ -107,7 +117,7 @@ export default function Form({navigation}) {
           <TextInput
             value={values.length}
             onChangeText={handleChange('length')}
-            placeholder="length"
+            placeholder={ myData ? myData.length : "length" }
             onBlur={() => setFieldTouched('length')}
             style={styles.input}
             placeholderTextColor={colors.primary}

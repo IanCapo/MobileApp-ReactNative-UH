@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Switch,
   View,
@@ -7,14 +7,18 @@ import {
 } from 'react-native';
 import colors from '../utilities/colors';
 
-const SwitchComponent = ({onPress}) => {
-  const [switchValue, setSwitchValue] = useState(false);
+const SwitchComponent = ({onPress, value}) => {
+  const [switchValue, setSwitchValue] = useState();
   const [isEnabled, setIsEnabled] = useState(false);
 
   const toggleSwitch = (value) => {
     setSwitchValue(value);
     onPress(switchValue ? 'girl' : 'boy' )
   };
+
+  useEffect(() => {
+    value === 'boy' ? setSwitchValue(true) : setSwitchValue(false)
+  }, [])
 
   return (
       <View style={styles.container}>
