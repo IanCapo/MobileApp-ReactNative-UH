@@ -1,20 +1,27 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
+import { View, StyleSheet, Text, Image, Button } from 'react-native';
 
 import Screen from '../components/Screen';
+import colors from '../utilities/colors';
+import Icon  from '../components/Icon';
 
-export default function MemoryDetailsScreen({ route }) {
+export default function MemoryDetailsScreen({ navigation, route }) {
   const { key, otherParam } = route.params;
-  const dateArray = otherParam.date.split('T')[0].split('-');
+  const index = otherParam.index
+  const data = otherParam.data
+  const dateArray = data[index].date.split('T')[0].split('-');
   const date = `${dateArray[1]}.${dateArray[2]}.${dateArray[0]}`;
-  
+
   return (
   <Screen key={key} style={ styles.container }>
-      <Image source={{ uri: otherParam.image.url }} style={styles.image} />
+      <Image source={{ uri: data[index].image.url }} style={styles.image} />
       <View style={styles.detailsContainer}>
-        <Text style={styles.title}>{otherParam.title}</Text>
+        <Text style={styles.title}>{data[index].title}</Text>
         <Text style={styles.date}>{date}</Text>
-        <Text style={styles.description}>{otherParam.description}</Text>
+        <Text style={styles.description}>{data[index].description}</Text>
+        <View style={ styles.buttonContainer }>
+          {index < data.length - 1 && <Icon size={30} name="forward" backgroundColor={colors.white} style={ [styles.buttonRight]} onPress={() => navigation.navigate('MemoryDetail', { key: `SCREEN_${index+1}`, otherParam: {data: data, index: index + 1} })} />}
+        </View>
       </View>
     </Screen>
   );
@@ -22,6 +29,17 @@ export default function MemoryDetailsScreen({ route }) {
 
 
 const styles = StyleSheet.create({
+   buttonRight: {
+    width: 70,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 15,
+    alignSelf: 'flex-end'
+  },
+  buttonContainer: {
+    marginTop: 40,
+  },
   container: {
     borderRadius: 15,
     marginTop: 20,

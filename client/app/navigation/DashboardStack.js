@@ -35,7 +35,10 @@ const DashboardStack = () => (
     <Stack.Screen
       name="MemoryDetail"
       component={MemoryDetailsScreen}
-      options={{ headerShown: true }} />
+      options={{ 
+        headerShown: true,
+        
+       }} />
     <Stack.Screen
       name="MilestoneDetail"
       component={MilestoneDetailScreen}

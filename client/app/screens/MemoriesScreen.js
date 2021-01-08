@@ -27,9 +27,9 @@ export default function MemoriesScreen({navigation}) {
         <Text style={styles.headline}>Memories</Text>
       </View>
       {isLoading && <Text>Please wait while we're fetching your data</Text>}
-      {myData && myData.map((memory) => {
+      {myData && myData.map((memory, index) => {
         return (
-        <TouchableOpacity key={memory.key} onPress={() => navigation.navigate('MemoryDetail', {otherParam: memory})}>
+          <TouchableOpacity key={memory.key} onPress={() => navigation.push('MemoryDetail', { key: `SCREEN_${0}`, otherParam: {data: myData, index: index} })}>
           <Image source={{ uri: memory.image.url }} style={styles.image} />
         </TouchableOpacity>
       )}) }
