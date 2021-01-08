@@ -5,15 +5,16 @@ import { View, StyleSheet, Text } from 'react-native'; import {
 import { Dimensions, ScrollView } from "react-native";
 
 import Screen from "../components/Screen";
+import RadioButton from '../components/RadioButton';
 import colors from "../utilities/colors";
 import cache from '../utilities/cache';
+import Chart from '../components/Chart';
 
 
 export default function DevelopmentScreen(props) {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
+  const [isWeight, setIsWeight] = useState(true)
   const [myData, setMyData] = useState();
-
-  const scrollView = useRef();
 
   useEffect(() => {
     const cachedData = async () => {
@@ -39,13 +40,7 @@ export default function DevelopmentScreen(props) {
   //   return Math.ceil(inch / 0.39370079)
   // }
 
-  const calcWidth = (data) => {
-    if (data.length * 70 < Dimensions.get("window").width) return Dimensions.get("window").width;
-    return data.length * 70;
-  }
-
   if(myData) {
-    
     const sortedmyData = myData.sort((a, b) => {
       var c = new Date(a.date).getTime();
       var d = new Date(b.date).getTime();
@@ -53,12 +48,16 @@ export default function DevelopmentScreen(props) {
     });
 
     const labels = [];
-    const graphData = [];
+    const graphDataWeight = [];
+    const graphDataLength = [];
     sortedmyData.map((item) => labels.push(transformDate(item.date)))
-    sortedmyData.map(item => graphData.push(item.percWeight*10))
+    sortedmyData.map(item => graphDataWeight.push(Math.round(item.percWeight))) 
+    sortedmyData.map(item => graphDataLength.push(Math.round(item.percLength)) )
+
     let weight;
     let length;
     let date;
+
     if(myData.length < 2) {
      weight = myData[0].weight;
      length = myData[0].length;
@@ -68,57 +67,19 @@ export default function DevelopmentScreen(props) {
     return (
       <React.Fragment>
         <View style={ styles.headlineContainer }>  
-          <Text style={ styles.headline }>Weight percentile</Text>
+          <Text style={ styles.headline }>Percentiles</Text>
+          <View>
+            <RadioButton onPress={(val) => setIsWeight(val)} />
+          </View>
         </View>
-        <ScrollView
-          horizontal
-          ref={scrollView}
-          style={styles.scrollView}
-          onContentSizeChange={() => scrollView.current.scrollToEnd()}
-        >
-          <LineChart
-            data={{
-              labels: labels,
-              datasets: [
-                {
-                  data: graphData
-                }
-              ]
-            }}
-            width={calcWidth(graphData)} // from react-native
-            height={320}
-            yAxisLabel=""
-            yAxisSuffix="%"
-            yAxisInterval={1} // optional, defaults to 1
-            chartConfig={{
-              backgroundColor: `${colors.white}`,
-              backgroundGradientFrom: `${colors.primary}`,
-              backgroundGradientTo: `${colors.secondary}`,
-              decimalPlaces: 0, // optional, defaults to 2dp
-              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-              labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-              style: {
-                borderRadius: 16,
-                paddingTop: 10
-              },
-              propsForDots: {
-                r: "6",
-                strokeWidth: "2",
-                stroke: `${colors.yellow}`
-              }
-            }}
-            bezier
-            style={{
-              borderRadius: 16,
-              marginVertical: 0
-            }}
-          />
-        </ScrollView>
+        <Text>{isWeight}</Text>
+        {isWeight && <Chart graphData={graphDataWeight} labels={labels} backgroundGradientFrom={colors.secondary} />} 
+        {!isWeight && <Chart graphData={graphDataLength} labels={labels} backgroundGradientFrom={colors.green} />}
         <Screen style={styles.screen}>
           <Text style={styles.heading}>Your last entry</Text>
-          <Text style={styles.text}>Date: {labels[graphData.length - 1]}</Text>
+          <Text style={styles.text}>Date: {labels[myData.length - 1]}</Text>
           <Text style={styles.text}>Weight: {myData[myData.length - 1].weight} lbs</Text>
-          <Text style={styles.text}>Percentile: {Math.round(myData[myData.length - 1].percWeight * 10)}</Text>
+          <Text style={styles.text}>Percentile: {Math.round(myData[myData.length - 1].percWeight)}</Text>
           <Text style={styles.text}>Height: {myData[myData.length - 1].length} in</Text>
         </Screen>
       </React.Fragment>

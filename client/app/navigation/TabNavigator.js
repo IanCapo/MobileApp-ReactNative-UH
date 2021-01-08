@@ -17,7 +17,7 @@ export default function Navigator({initialRouteName}) {
     <Tab.Navigator 
       initialRouteName={initialRouteName} 
       tabBarOptions={{
-      showLabel: false
+      showLabel: false,
     }}
     >
       <Tab.Screen name="dashboard" component={DashboardStack} options={{
