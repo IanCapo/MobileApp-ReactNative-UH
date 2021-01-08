@@ -29,7 +29,7 @@ export default function Form({ initialValues, onPress }) {
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required().min(1).label("Title"),
-    description: Yup.string().required().label("Description")
+    description: Yup.string().label("Description")
   });
 
   return (
