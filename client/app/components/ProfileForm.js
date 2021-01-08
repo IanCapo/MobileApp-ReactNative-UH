@@ -83,7 +83,7 @@ export default function Form({navigation}) {
         {!myData && <ImageInput value={values.image} onPress={img => setImage(img)} />}
         <Text style={ styles.text }>Name of your child</Text>
           <TextInput
-            value={values.name ? values.name : myData.name}
+            value={values.name}
             onChangeText={handleChange('name')}
             onBlur={() => setFieldTouched('name')}
             placeholder={myData ? myData.name : "name"}
