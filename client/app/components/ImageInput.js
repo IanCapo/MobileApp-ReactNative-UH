@@ -8,6 +8,7 @@ import ImageWithIcon from './ImageWithIcon';
 
 export default function ImageInput({type, existingImage, onPress }) {
   const [image, setImage] = existingImage ? useState(existingImage.url) : useState(null);
+  
   useEffect(() => {
     (async () => {
       if (Platform.OS !== 'web') {
@@ -43,9 +44,9 @@ export default function ImageInput({type, existingImage, onPress }) {
   }
 
   return (
-    <TouchableWithoutFeedback style={[styles.container]} onPress={pickImage}>
-      <View>
-        {!image && <Icon name="camera" size={50} color="darkgrey" backgroundColor={colors.primary} /> }
+    <TouchableWithoutFeedback onPress={pickImage}>
+      <View style={styles.container}>
+        {!image && <Icon name="camera" size={50} color={colors.primary} backgroundColor="darkgrey" style={ styles.icon }/> }
         {image && renderImage(type) }
         </View>
     </TouchableWithoutFeedback>
@@ -55,9 +56,15 @@ export default function ImageInput({type, existingImage, onPress }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+  },
+  icon: {
+    width: 110,
+    height: 110,
+    borderRadius: 15,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   image: {
     width: 120,

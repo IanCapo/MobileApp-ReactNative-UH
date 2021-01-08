@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -26,7 +26,6 @@ function App() {
      mounted = false
     }
   }, [])
-
 
   if(!isLoading) {
       return (

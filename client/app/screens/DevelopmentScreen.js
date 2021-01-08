@@ -31,13 +31,13 @@ export default function DevelopmentScreen(props) {
     return transformedDate;
   }
 
-  const convertToGrams = (p) => {
-    return Math.ceil((p * 453.5) / 10) * 10
-  }
+  // const convertToGrams = (p) => {
+  //   return Math.ceil((p * 453.5) / 10) * 10
+  // }
 
-  const convertToCm = (inch) => {
-    return Math.ceil(inch / 0.39370079)
-  }
+  // const convertToCm = (inch) => {
+  //   return Math.ceil(inch / 0.39370079)
+  // }
 
   const calcWidth = (data) => {
     if (data.length * 70 < Dimensions.get("window").width) return Dimensions.get("window").width;
@@ -117,9 +117,9 @@ export default function DevelopmentScreen(props) {
         <Screen style={styles.screen}>
           <Text style={styles.heading}>Your last entry</Text>
           <Text style={styles.text}>Date: {labels[graphData.length - 1]}</Text>
-          <Text style={styles.text}>Weight: &asymp; {convertToGrams(myData[myData.length - 1].weight)} g</Text>
+          <Text style={styles.text}>Weight: {myData[myData.length - 1].weight} lbs</Text>
           <Text style={styles.text}>Percentile: {Math.round(myData[myData.length - 1].percWeight * 10)}</Text>
-          <Text style={styles.text}>Height: &asymp; {convertToCm(myData[myData.length - 1].length)} cm</Text>
+          <Text style={styles.text}>Height: {myData[myData.length - 1].length} in</Text>
         </Screen>
       </React.Fragment>
   );
@@ -149,7 +149,8 @@ const styles = StyleSheet.create({
       "center"
   },
   screen: {
-    paddingLeft: 30
+    paddingLeft: 30,
+    paddingBottom: 40
   },
   scrollView: {
     paddingTop: 20,

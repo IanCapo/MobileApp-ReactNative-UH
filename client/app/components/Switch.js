@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Switch,
   View,
@@ -7,37 +7,42 @@ import {
 } from 'react-native';
 import colors from '../utilities/colors';
 
-const SwitchComponent = ({onPress}) => {
-  const [switchValue, setSwitchValue] = useState(false);
+const SwitchComponent = ({onPress, value}) => {
+  const [switchValue, setSwitchValue] = useState();
+  const [isEnabled, setIsEnabled] = useState(false);
 
   const toggleSwitch = (value) => {
     setSwitchValue(value);
     onPress(switchValue ? 'girl' : 'boy' )
   };
 
+  useEffect(() => {
+    value === 'boy' ? setSwitchValue(true) : setSwitchValue(false)
+  }, [])
+
   return (
       <View style={styles.container}>
+      <Text>
+        Girl
+      </Text>
         <Switch
-          style={{ marginTop: 30, marginBottom: 10 }}
+          style={{ marginLeft: 10, marginRight: 10 }}
           onValueChange={toggleSwitch}
           value={switchValue}
-          trackColor={colors.yellow}
-          ios_backgroundColor={colors.secondary}
+          trackColor={{ false: 'lightgray', true: 'lightgray' }}
+          thumbColor={isEnabled ? "#7D84B2" : colors.yellow}
         />
-      <Text>
-        {switchValue ? 'Boy' : 'Girl'}
-      </Text>
+        <Text>Boy</Text>
       </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    alignSelf: 'flex-start',
-    marginBottom: 10
+    marginTop: 10
   },
 });
 
