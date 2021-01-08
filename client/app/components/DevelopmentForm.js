@@ -64,6 +64,7 @@ export default function Form({ initialValues, onPress }) {
             onBlur={() => setFieldTouched('weight')}
             style={styles.input}
             placeholderTextColor={colors.primary}
+            keyboardType='numeric'
           />
           {touched.weight && errors.weight &&
             <Text style={{ fontSize: 10, color: 'red' }}>{errors.weight}</Text>
@@ -76,6 +77,7 @@ export default function Form({ initialValues, onPress }) {
             onBlur={() => setFieldTouched('length')}
             style={styles.input}
             placeholderTextColor={colors.primary}
+            keyboardType='numeric'
           />
           {touched.length && errors.length &&
             <Text style={{ fontSize: 10, color: 'red' }}>{errors.length}</Text>
