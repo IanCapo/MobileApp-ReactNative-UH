@@ -56,7 +56,7 @@ export default function Form({ initialValues, onPress }) {
         <View>
           <Text style={styles.text}>Date</Text>
           <DatePicker thisDate={todayDate} onPress={(value) => setDate(value)} />
-          <Text style={styles.text}>Weight in g</Text>
+          <Text style={styles.text}>Weight in lbs</Text>
           <TextInput
             value={values.weight}
             onChangeText={handleChange('weight')}
@@ -69,7 +69,7 @@ export default function Form({ initialValues, onPress }) {
           {touched.weight && errors.weight &&
             <Text style={{ fontSize: 10, color: 'red' }}>{errors.weight}</Text>
           }
-          <Text style={styles.text}>Length in cm</Text>
+          <Text style={styles.text}>Length in inches</Text>
           <TextInput
             value={values.length}
             onChangeText={handleChange('length')}

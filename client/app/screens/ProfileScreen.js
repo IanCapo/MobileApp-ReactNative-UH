@@ -66,13 +66,13 @@ export default function ProfileScreen() {
             icon="scale" 
             placeholder={myData.weight.toString()} 
             type="number" 
-            unit="g" 
+            unit="lbs" 
            />
           <InputWithLabel 
             icon="human-male-height" 
             placeholder={myData.length.toString()} 
             type="number" 
-            unit="cm" 
+            unit="in" 
          />
           <InputWithLabel 
             icon="face" 

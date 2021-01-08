@@ -1,7 +1,7 @@
 const addDevelopmentData = async (data) => {
   const date = data.date;
-  const length = convertToInches(data.length);
-  const weight = convertToPounds(data.weight);
+  const length = data.length;
+  const weight = data.weight;
   const sex = data.sex === 'boy' ? 1 : 2
   const months = calcMonths(data.refDate, data.date);
 
@@ -11,13 +11,13 @@ const addDevelopmentData = async (data) => {
   return newEntry;
 }
 
-const convertToPounds = (g) => {
-  return parseFloat(g * 0.00220462)
-}
+// const convertToPounds = (g) => {
+//   return parseFloat(g * 0.00220462)
+// }
 
-const convertToInches = (cm) => {
-  return parseFloat(cm * 0.39370079)
-}
+// const convertToInches = (cm) => {
+//   return parseFloat(cm * 0.39370079)
+// }
 
 const calcMonths = (a, b) => {
   let dateA = new Date(a).getTime();

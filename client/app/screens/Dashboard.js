@@ -14,19 +14,23 @@ export default function Dashboard() {
   <Screen style={ styles.container }>
     <Text style={ styles.headLine}>My Baby</Text>
       <View style={ styles.row }>
-      <TouchableOpacity onPress={() => navigation.navigate('Profile', { otherParam: null })}>
+      <TouchableOpacity onPress={() => navigation.navigate('Profile', { otherParam: null })} style={ styles.tabContainer}>
           <Icon name="account-badge-horizontal-outline" size={50} color="white" backgroundColor={colors.secondary} />
+          <Text style={ styles.title }>Profile</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('MileStones')}>
+        <TouchableOpacity onPress={() => navigation.navigate('MileStones')} style={styles.tabContainer}>
           <Icon name="flag-variant" size={50} color="white" backgroundColor={colors.secondary} />
+          <Text style={styles.title}>Milestones</Text>
       </TouchableOpacity>
       </View>
       <View style={ styles.row }>
-        <TouchableOpacity onPress={() => navigation.navigate('Development')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Development')} style={styles.tabContainer}>
           <Icon name="chart-line" size={50} color="white" backgroundColor={colors.secondary} />
+          <Text style={styles.title}>Development</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Memories')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Memories')} style={styles.tabContainer}>
           <Icon name="camera-burst" size={50} color="white" backgroundColor={colors.secondary} />
+          <Text style={styles.title}>Memories</Text>
         </TouchableOpacity>
       </View>
     </Screen>
@@ -40,6 +44,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   }, 
+  tabContainer: {
+    alignItems: 'center',
+  },
   headLine: {
     fontSize: 24
   },
@@ -48,5 +55,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     width: "100%",
     paddingTop: 40,
+  },
+  title: {
+    marginTop: 5,
   }
 });
