@@ -52,7 +52,7 @@ export default function DevelopmentScreen(props) {
     const graphDataLength = [];
     sortedmyData.map((item) => labels.push(transformDate(item.date)))
     sortedmyData.map(item => graphDataWeight.push(Math.round(item.percWeight))) 
-    sortedmyData.map(item => graphDataLength.push(Math.round(item.percLength)) )
+    sortedmyData.map(item => graphDataLength.push(Math.round(item.percLength)))
 
     let weight;
     let length;
@@ -63,7 +63,6 @@ export default function DevelopmentScreen(props) {
      length = myData[0].length;
      date = myData[0].date;
     }
-
     return (
       <React.Fragment>
         <View style={ styles.headlineContainer }>  
@@ -73,8 +72,8 @@ export default function DevelopmentScreen(props) {
           </View>
         </View>
         <Text>{isWeight}</Text>
-        {isWeight && <Chart graphData={graphDataWeight} labels={labels} backgroundGradientFrom={colors.secondary} />} 
-        {!isWeight && <Chart graphData={graphDataLength} labels={labels} backgroundGradientFrom={colors.green} />}
+        {isWeight && <Chart graphData={graphDataWeight} labels={labels} backgroundGradientFrom="#91C7B1" />} 
+        {!isWeight && <Chart graphData={graphDataLength} labels={labels} backgroundGradientFrom="#799496" />}
         <Screen style={styles.screen}>
           <Text style={styles.heading}>Your last entry</Text>
           <Text style={styles.text}>Date: {labels[myData.length - 1]}</Text>

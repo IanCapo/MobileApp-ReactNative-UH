@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import TabNavigator from './app/navigation/TabNavigator';
 import cache from  './app/utilities/cache';
+import DashboardStack from './app/navigation/DashboardStack';
 
 function App() {
   const [user, setUser] = useState(false);
@@ -31,8 +32,9 @@ function App() {
       return (
       <React.Fragment>
       <NavigationContainer >
-       { user && <TabNavigator initialRouteName='dashboard'/> }
-       { !user && <TabNavigator initialRouteName='Account'/> }
+       
+        { user && <TabNavigator initialRouteName='dashboard' /> }
+        { !user && <TabNavigator initialRouteName='Onboarding' /> }
       </NavigationContainer>
       </React.Fragment>
     );
@@ -60,3 +62,4 @@ const styles = StyleSheet.create({
 })
 
 export default App;
+
