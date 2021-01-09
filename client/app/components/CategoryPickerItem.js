@@ -5,7 +5,7 @@ import Icon from './Icon';
 import colors from '../utilities/colors';
 
 export default function CategoryPickerItem({name, onPress, value, isActive}) {
-
+console.log(name);
 const handlePress = () => {
   onPress(value);
 }
@@ -15,7 +15,6 @@ const handlePress = () => {
     </TouchableOpacity>
   );
 };
-
 
 const styles = StyleSheet.create({
   icon: {

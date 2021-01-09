@@ -66,6 +66,7 @@ export default function Form({ initialValues, onPress }) {
             onBlur={() => setFieldTouched('description')}
             style={styles.input}
             placeholderTextColor={colors.primary}
+            multiline={true}
           />
           {touched.description && errors.description &&
             <Text style={{ fontSize: 10, color: 'red' }}>{errors.description}</Text>

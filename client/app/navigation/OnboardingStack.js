@@ -37,13 +37,6 @@ const OnboardingStack = () => (
       name="2"
       component={OnboardingForms}
       options={{
-        headerStyle: {
-          backgroundColor: '#d8d8d8', //Set Header color
-        },
-        headerTintColor: 'black', //Set Header text color
-        headerTitleStyle: {
-          fontWeight: 'bold', //Set Header text style
-        },
         tabBarIcon: () => <MaterialCommunityIcons name="plus-circle" size={20} />,
       }}
       />

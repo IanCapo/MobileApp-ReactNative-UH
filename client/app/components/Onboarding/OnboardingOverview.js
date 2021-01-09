@@ -14,7 +14,7 @@ export default function OnboardingOverview(props) {
         <VerticalLine style={ styles.line } />
         <View style={ styles.description }>
           <Text>
-            Go back in time and revisit pressues moments on the memory tab, follow your little ones milestone and compare weight and length to others babies.
+            Go back in time and revisit precious moments on the memory tab, follow your little one's milestones and compare weight and length to other babies.
             </Text>
             <Text>
             
