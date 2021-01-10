@@ -9,6 +9,7 @@ import DashboardStack from './app/navigation/DashboardStack';
 function App() {
   const [user, setUser] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  // only use for development purposes (deletes all cached data)
   //cache.removeFew()
 
   useEffect(() => {

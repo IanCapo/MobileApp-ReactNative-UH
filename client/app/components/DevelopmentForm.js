@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { StyleSheet, TextInput, Text, View } from 'react-native';
 import * as Yup from "yup";
 import { Formik } from 'formik';
+import Constants from 'expo-constants';
 
 import colors from '../utilities/colors';
 import Icon from './Icon';
 import DatePicker from './DatePicker';
+import AndroidDatePicker from './AndroidDatePicker';
 import cache from "../utilities/cache";
 
 
@@ -13,6 +15,8 @@ export default function Form({ initialValues, onPress }) {
   const [todayDate, setDate] = useState(new Date());
   const [dob, setDob] = useState();
   const [sex, setSex] = useState();
+
+  const isAndroid = (!Constants.platform['ios']);
 
   useEffect(() => {
     const cachedData = async () => {
@@ -35,7 +39,6 @@ export default function Form({ initialValues, onPress }) {
       refDate: dob,
       sex: sex
     }
-    
       onPress(body);
       setDate(new Date());
       resetForm()
@@ -54,8 +57,10 @@ export default function Form({ initialValues, onPress }) {
     >
       {({ values, handleChange, setFieldTouched, touched, errors, handleSubmit, isValid }) => (
         <View>
-          <Text style={styles.text}>Date</Text>
-          <DatePicker thisDate={todayDate} onPress={(value) => setDate(value)} />
+         {!isAndroid && <Text style={styles.text}>Date</Text> }
+         {!isAndroid  && <DatePicker thisDate={todayDate} onPress={(value) => setDate(value)} /> }
+         {isAndroid && <Text style={styles.text}>Date MM.DD.YY</Text>}
+         {isAndroid  && <AndroidDatePicker thisDate={todayDate} onPress={(value) => setDate(value)} /> }
           <Text style={styles.text}>Weight in lbs</Text>
           <TextInput
             value={values.weight}
