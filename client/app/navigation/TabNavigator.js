@@ -3,11 +3,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import colors from '../utilities/colors';
-import Dashboard from '../screens/Dashboard';
 import AddScreen from '../screens/AddScreen';
-import ProfileForm from '../components/ProfileForm';
 import AddButton from "./AddButton";
 import DashboardStack from './DashboardStack';
+import OnboardingStack from './OnboardingStack';
 
 
 const Tab = createBottomTabNavigator();
@@ -17,7 +16,7 @@ export default function Navigator({initialRouteName}) {
     <Tab.Navigator 
       initialRouteName={initialRouteName} 
       tabBarOptions={{
-      showLabel: false
+      showLabel: false,
     }}
     >
       <Tab.Screen name="dashboard" component={DashboardStack} options={{
@@ -40,9 +39,9 @@ export default function Navigator({initialRouteName}) {
           )
         })}
       />
-      <Tab.Screen name="Account" component={ProfileForm} options={{
+      <Tab.Screen name="Onboarding" component={OnboardingStack} options={{
         tabBarIcon: () =>
-          <MaterialCommunityIcons name="account" size={30} color={colors.primary} />
+          <MaterialCommunityIcons name="help-circle-outline" size={35} color={colors.primary} />
       }}
       />
     </Tab.Navigator>

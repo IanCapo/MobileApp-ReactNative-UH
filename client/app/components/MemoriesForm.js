@@ -1,18 +1,22 @@
 import React, { useState } from 'react'
 import { StyleSheet, TextInput, Text, View } from 'react-native';
 import * as Yup from "yup";
+import Constants from 'expo-constants';
 
 import { Formik } from 'formik';
 import colors from '../utilities/colors';
 import Icon from './Icon';
 import ImageInput from '../components/ImageInput';
 import DatePicker from './DatePicker';
+import AndroidDatePicker from './AndroidDatePicker';
 
 
 export default function Form({ initialValues, onPress }) {
   const [image, setImage] = useState();
   const [date, setDate] = useState(new Date());
   let img = image;
+
+  const isAndroid = (!Constants.platform['ios']);
 
   const handleSubmit = (data, {resetForm}) => {
     const body = {
@@ -38,7 +42,7 @@ export default function Form({ initialValues, onPress }) {
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
     >
-      {({ values, handleChange, setFieldTouched, touched, isValid, errors, handleSubmit }) => (
+      {({ values, handleChange, setFieldTouched, touched, isValid = false, errors, handleSubmit }) => (
         <View style={ styles.container }>
         <ImageInput value={values.image} style={ styles.image } onPress={value => setImage(value)} />
         <Text style={ styles.text }>Title</Text>
@@ -54,7 +58,10 @@ export default function Form({ initialValues, onPress }) {
             <Text style={{ fontSize: 10, color: 'red' }}>{errors.title}</Text>
           }
           <Text style={styles.text}>Date</Text>
-          <DatePicker thisDate={date} onPress={(value) => setDate(value)} />
+          {!isAndroid && <Text style={styles.text}>Date</Text>}
+          {!isAndroid && <DatePicker thisDate={date} onPress={(value) => setDate(value)} />}
+          {isAndroid && <Text style={styles.text}>Date MM.DD.YY</Text>}
+          {isAndroid && <AndroidDatePicker thisDate={date} onPress={(value) => setDate(value)} />}
           <Text style={styles.text}>Describe your memory</Text>
           <TextInput
             value={values.description}
@@ -63,6 +70,7 @@ export default function Form({ initialValues, onPress }) {
             onBlur={() => setFieldTouched('description')}
             style={styles.input}
             placeholderTextColor={colors.primary}
+            multiline={true}
           />
           {touched.description && errors.description &&
             <Text style={{ fontSize: 10, color: 'red' }}>{errors.description}</Text>
@@ -72,7 +80,7 @@ export default function Form({ initialValues, onPress }) {
             onPress={isValid && handleSubmit}
             style={styles.icon} 
             size={30}
-            backgroundColor={isValid ? colors.green : colors.primary}
+            backgroundColor={colors.green}
           />
         </View>
       )}

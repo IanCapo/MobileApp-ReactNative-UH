@@ -21,9 +21,9 @@ export default function AddScreen({onPress, navigation}) {
   }
 
   const items = [
-    { name: "heart-multiple-outline", value: "milestones", isActive: category === "milestones" },
+    { name: "flag-variant", value: "milestones", isActive: category === "milestones" },
     { name: "chart-line", value: "development", isActive: category === "development" },
-    { name: "airballoon", value: "memories", isActive: category === "memories" }
+    { name: "camera-burst", value: "memories", isActive: category === "memories" }
   ]
 
   const initialValues = {

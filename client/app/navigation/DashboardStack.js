@@ -35,11 +35,17 @@ const DashboardStack = () => (
     <Stack.Screen
       name="MemoryDetail"
       component={MemoryDetailsScreen}
-      options={{ headerShown: true }} />
+      options={{ 
+        headerShown: true,
+        title: ''
+       }} />
     <Stack.Screen
       name="MilestoneDetail"
       component={MilestoneDetailScreen}
-      options={{ headerShown: true }} />
+      options={{ 
+        headerShown: true,
+        title: ''
+       }} />
     <Stack.Screen
       name="AfterSubmitOptions"
       component={AddScreenHolder}

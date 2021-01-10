@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { StyleSheet, TextInput, Text, View } from 'react-native';
 import * as Yup from "yup";
 import { Formik } from 'formik';
+import Constants from 'expo-constants';
 
 import colors from '../utilities/colors';
 import Icon from './Icon';
 import ImageInput from '../components/ImageInput';
 import DatePicker from './DatePicker';
+import AndroidDatePicker from './AndroidDatePicker';
 import Screen from './Screen';
 import SwitchComponent from './Switch';
 import cache from '../utilities/cache';
@@ -20,6 +22,12 @@ export default function Form({navigation}) {
   let img = image;
   let sx = sex;
 
+  const isAndroid = (!Constants.platform['ios']);
+
+  const renderDatePicker = (date) => {
+    if (isAndroid) return <AndroidDatePicker thisDate={date} onPress={(value) => setDate(value)} />
+      return <DatePicker thisDate={date} onPress={(value) => setDate(value)} />
+    }
 
   useEffect(() => {
     const cachedData = async () => {
@@ -76,7 +84,7 @@ export default function Form({navigation}) {
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
     >
-      {({ values, handleChange, setFieldTouched, touched, errors, handleSubmit }) => (
+      {({ values, handleChange, setFieldTouched, touched, errors, isValid, handleSubmit }) => (
         <Screen style={ styles.container }>
         <Text style={ styles.headline }>Update your childs profile</Text>
         {myData && <ImageInput value={values.image} existingImage={image} onPress={img => setImage(img)} />}
@@ -94,8 +102,8 @@ export default function Form({navigation}) {
             <Text style={{ fontSize: 10, color: 'red' }}>{errors.name}</Text>
           }
           <Text style={styles.text}>Date of birth</Text>
-          {myData && <DatePicker thisDate={myData.dob} onPress={(value) => setDate(value)} /> }
-          {!myData && <DatePicker thisDate={todayDate} onPress={(value) => setDate(value)} />}
+          {myData && renderDatePicker(myData.dob) }
+          {!myData && renderDatePicker(todayDate) }
           <View style={ styles.switch }>
             <Text style={styles.text}>Sex</Text>
             <SwitchComponent value={myData.sex} onPress={value => setSex(value)} />
@@ -131,6 +139,7 @@ export default function Form({navigation}) {
             onPress={handleSubmit}
             style={ styles.button }
             size={30}
+            backgroundColor={isValid ? colors.green : colors.white}
           />
         </Screen>
       )}

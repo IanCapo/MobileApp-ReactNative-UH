@@ -47,7 +47,7 @@ const createNewEntry = (perc, weight, length, date) => {
     let percLength = perc.split(',')[1];
 
     newEntry = {
-      date: date, percWeight: percWeight, percLenght: percLength, weight: weight, length: length
+      date: date, percWeight: percWeight, percLength: percLength, weight: weight, length: length
     }
     return newEntry
 }
